@@ -24,19 +24,19 @@ public class EmployeController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Validated EmployeDto employeDto) {
-        employeService.save(employeDto);
+        employeService.addData(employeDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        EmployeDto employe = employeService.findById(id);
+        EmployeDto employe = employeService.searchById(id);
         return ResponseEntity.ok(employe);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(employeService.findById(id));
+        Optional.ofNullable(employeService.searchById(id));
         employeService.deleteById(id);
         return ResponseEntity.ok().build();
     }

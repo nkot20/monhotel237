@@ -7,41 +7,52 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EmployeDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Employe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EmployeMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.*;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IEmploye;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service
 @Transactional
-public class EmployeService {
+public class EmployeService implements IEmploye {
 
     @Autowired
     private EmployeRepository repository;
     @Autowired
     private EmployeMapper employeMapper;
 
-    public EmployeDto save(EmployeDto employeDto) {
+    @Override
+    public EmployeDto addData(EmployeDto employeDto) {
         return employeMapper.toDto(repository.save(employeMapper.toEntity(employeDto)));
     }
 
+    @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 
-    public EmployeDto findById(Integer id) throws HotelException {
+    @Override
+    public EmployeDto searchById(Integer id) throws HotelException {
         return employeMapper.toDto(repository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
     }
 
+    @Override
     public EmployeDto update(EmployeDto employeDto) throws HotelException {
-        EmployeDto data = findById(employeDto.getId());
+        EmployeDto data = searchById(employeDto.getId());
         Employe entity = employeMapper.toEntity(employeDto);
         employeMapper.copy(data, entity);
-        return save(employeMapper.toDto(entity));
+        return addData(employeMapper.toDto(entity));
+    }
+
+    @Override
+    public EmployeDto getAll() {
+        return null;
+    }
+
+    @Override
+    public Employe searchByEmail(String email) {
+        return null;
     }
 }

@@ -7,41 +7,47 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ChambreDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Chambre;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.ChambreMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.ChambreRepository;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IChambre;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service
 @Transactional
-public class ChambreService {
+public class ChambreServiceImpl implements IChambre {
 
     @Autowired
     private ChambreRepository repository;
     @Autowired
     private ChambreMapper chambreMapper;
 
-    public ChambreDto save(ChambreDto chambreDto) {
+    @Override
+    public ChambreDto addData(ChambreDto chambreDto) {
         return chambreMapper.toDto(repository.save(chambreMapper.toEntity(chambreDto)));
     }
 
+    @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 
-    public ChambreDto findById(Integer id) throws HotelException {
+    @Override
+    public ChambreDto searchById(Integer id) throws HotelException {
         return chambreMapper.toDto(repository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
     }
 
+    @Override
     public ChambreDto update(ChambreDto chambreDto) throws HotelException {
-        ChambreDto data = findById(chambreDto.getId());
+        ChambreDto data = searchById(chambreDto.getId());
         Chambre entity = chambreMapper.toEntity(chambreDto);
         chambreMapper.copy(data, entity);
-        return save(chambreMapper.toDto(entity));
+        return addData(chambreMapper.toDto(entity));
+    }
+
+    @Override
+    public ChambreDto getAll() {
+        return null;
     }
 }

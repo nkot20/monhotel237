@@ -24,19 +24,19 @@ public class UtilisateurhotelgroupeController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Validated UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) {
-        utilisateurhotelgroupeService.save(utilisateurhotelgroupeDto);
+        utilisateurhotelgroupeService.addData(utilisateurhotelgroupeDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UtilisateurhotelgroupeDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        UtilisateurhotelgroupeDto utilisateurhotelgroupe = utilisateurhotelgroupeService.findById(id);
+        UtilisateurhotelgroupeDto utilisateurhotelgroupe = utilisateurhotelgroupeService.searchById(id);
         return ResponseEntity.ok(utilisateurhotelgroupe);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(utilisateurhotelgroupeService.findById(id));
+        Optional.ofNullable(utilisateurhotelgroupeService.searchById(id));
         utilisateurhotelgroupeService.deleteById(id);
         return ResponseEntity.ok().build();
     }

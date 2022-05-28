@@ -24,19 +24,19 @@ public class RoleController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Validated RoleDto roleDto) {
-        roleService.save(roleDto);
+        roleService.addData(roleDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<RoleDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        RoleDto role = roleService.findById(id);
+        RoleDto role = roleService.searchById(id);
         return ResponseEntity.ok(role);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(roleService.findById(id));
+        Optional.ofNullable(roleService.searchById(id));
         roleService.deleteById(id);
         return ResponseEntity.ok().build();
     }

@@ -24,19 +24,19 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Validated ClientDto clientDto) {
-        clientService.save(clientDto);
+        clientService.addData(clientDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClientDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        ClientDto client = clientService.findById(id);
+        ClientDto client = clientService.searchById(id);
         return ResponseEntity.ok(client);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(clientService.findById(id));
+        Optional.ofNullable(clientService.searchById(id));
         clientService.deleteById(id);
         return ResponseEntity.ok().build();
     }

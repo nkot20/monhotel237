@@ -7,42 +7,53 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.Utilisateurhotelgro
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Utilisateurhotelgroupe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.UtilisateurhotelgroupeMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.*;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IUtilisateurHotelGroupe;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service
 @Transactional
-public class UtilisateurhotelgroupeService {
+public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
 
     @Autowired
     private UtilisateurhotelgroupeRepository repository;
     @Autowired
     private UtilisateurhotelgroupeMapper utilisateurhotelgroupeMapper;
 
-    public UtilisateurhotelgroupeDto save(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) {
+    @Override
+    public UtilisateurhotelgroupeDto addData(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) {
         return utilisateurhotelgroupeMapper.toDto(repository.save(utilisateurhotelgroupeMapper.toEntity(utilisateurhotelgroupeDto)));
     }
 
+    @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 
-    public UtilisateurhotelgroupeDto findById(Integer id) throws HotelException {
+    @Override
+    public UtilisateurhotelgroupeDto searchById(Integer id) throws HotelException {
         return utilisateurhotelgroupeMapper.toDto(repository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
     }
 
 
+    @Override
     public UtilisateurhotelgroupeDto update(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
-        UtilisateurhotelgroupeDto data = findById(utilisateurhotelgroupeDto.getId());
+        UtilisateurhotelgroupeDto data = searchById(utilisateurhotelgroupeDto.getId());
         Utilisateurhotelgroupe entity = utilisateurhotelgroupeMapper.toEntity(utilisateurhotelgroupeDto);
         utilisateurhotelgroupeMapper.copy(data, entity);
-        return save(utilisateurhotelgroupeMapper.toDto(entity));
+        return addData(utilisateurhotelgroupeMapper.toDto(entity));
+    }
+
+    @Override
+    public UtilisateurhotelgroupeDto getAll() {
+        return null;
+    }
+
+    @Override
+    public Utilisateurhotelgroupe searchByEmail(String email) {
+        return null;
     }
 }

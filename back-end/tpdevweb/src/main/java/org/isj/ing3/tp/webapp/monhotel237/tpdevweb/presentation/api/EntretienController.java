@@ -24,19 +24,19 @@ public class EntretienController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Validated EntretienDto entretienDto) {
-        entretienService.save(entretienDto);
+        entretienService.addData(entretienDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EntretienDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        EntretienDto entretien = entretienService.findById(id);
+        EntretienDto entretien = entretienService.searchById(id);
         return ResponseEntity.ok(entretien);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(entretienService.findById(id));
+        Optional.ofNullable(entretienService.searchById(id));
         entretienService.deleteById(id);
         return ResponseEntity.ok().build();
     }
