@@ -42,8 +42,8 @@ public class HotelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated HotelDto hotelDto, @PathVariable("id") Integer id) throws HotelException {
-        hotelService.update(hotelDto, id);
+    public ResponseEntity<Void> update(@RequestBody @Validated HotelDto hotelDto) throws HotelException {
+        hotelService.update(hotelDto);
         return ResponseEntity.ok().build();
     }
 }
