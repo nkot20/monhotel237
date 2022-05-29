@@ -22,28 +22,28 @@ public class CategoriechambreController {
         this.categoriechambreService = categoriechambreService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated CategoriechambreDto categoriechambreDto) {
+    @PostMapping("/savecategoryroom")
+    public ResponseEntity<Void> save(@RequestBody CategoriechambreDto categoriechambreDto) throws HotelException {
         categoriechambreService.addData(categoriechambreDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoriechambreDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        CategoriechambreDto categoriechambre = categoriechambreService.searchById(id);
+    @GetMapping("findcategoryroom/{libelle}")
+    public ResponseEntity<CategoriechambreDto> findByLibelle(@PathVariable("libelle") String libelle) throws HotelException {
+        CategoriechambreDto categoriechambre = categoriechambreService.searchCategoriechambreByLibelle2(libelle);
         return ResponseEntity.ok(categoriechambre);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(categoriechambreService.searchById(id));
-        categoriechambreService.deleteById(id);
+    @DeleteMapping("deletecategoryroom/{libelle}")
+    public ResponseEntity<Void> delete(@PathVariable("libelle") String libelle) throws HotelException {
+        Optional.ofNullable(categoriechambreService.searchCategoriechambreByLibelle(libelle));
+        categoriechambreService.deleteByLibelle(libelle);
         return ResponseEntity.ok().build();
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated CategoriechambreDto categoriechambreDto) throws HotelException {
+    @PutMapping("/updatecatroom")
+    public ResponseEntity<Void> update(@RequestBody CategoriechambreDto categoriechambreDto) throws HotelException {
         categoriechambreService.update(categoriechambreDto);
         return ResponseEntity.ok().build();
     }

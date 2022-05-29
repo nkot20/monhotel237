@@ -11,8 +11,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Data
 public class CategorieDto implements Serializable {
-    private Integer id;
-    private Integer intitule;
+
+    private String intitule;
     private Instant datemodif;
     private String user;
 }

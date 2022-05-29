@@ -23,30 +23,30 @@ public class CategorieController {
         this.categorieService = categorieService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated CategorieDto categorieDto) {
+    @PostMapping("/savecat")
+    public ResponseEntity<Void> save(@RequestBody CategorieDto categorieDto) throws HotelException {
         categorieService.addData(categorieDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategorieDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        CategorieDto categorie = categorieService.searchById(id);
+    @GetMapping("/findcat/{intitule}")
+    public ResponseEntity<CategorieDto> findByIntitule(@PathVariable("intitule") String intitule) throws HotelException {
+        CategorieDto categorie = categorieService.searchCategorieByIntitule2(intitule);
         return ResponseEntity.ok(categorie);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(categorieService.searchById(id)).orElseThrow(() -> {
+    @DeleteMapping("/deletecat/{intitule}")
+    public ResponseEntity<Void> delete(@PathVariable("intitule") String intitule) throws HotelException {
+        Optional.ofNullable(categorieService.searchCategorieByIntitule(intitule)).orElseThrow(() -> {
             log.error("Unable to delete non-existent data！");
             return new ResourceNotFoundException("Unable to delete non-existent data！");
         });
-        categorieService.deleteById(id);
+        categorieService.deleteByIntitule(intitule);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated CategorieDto categorieDto) throws HotelException {
+    @PutMapping("/updatecat")
+    public ResponseEntity<Void> update(@RequestBody CategorieDto categorieDto) throws HotelException {
         categorieService.update(categorieDto);
         return ResponseEntity.ok().build();
     }

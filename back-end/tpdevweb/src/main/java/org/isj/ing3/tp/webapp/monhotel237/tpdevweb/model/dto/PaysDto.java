@@ -11,7 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Data
 public class PaysDto implements Serializable {
-    private Integer id;
+
     private String nompays;
     private Instant datemodif;
     private String user;

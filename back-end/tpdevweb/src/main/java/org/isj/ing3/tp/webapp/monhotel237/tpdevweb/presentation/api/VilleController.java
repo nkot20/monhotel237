@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.VilleDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Ville;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.VilleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,28 +23,27 @@ public class VilleController {
         this.villeService = villeService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated VilleDto villeDto) {
+    @PostMapping("/savecity")
+    public ResponseEntity<Void> save(@RequestBody VilleDto villeDto) throws HotelException {
         villeService.addData(villeDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VilleDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        VilleDto ville = villeService.searchById(id);
+    @GetMapping("/getville/{name}")
+    public ResponseEntity<Ville> findByName(@PathVariable("name") String name) throws HotelException {
+        Ville ville = villeService.searchCityByName(name);
         return ResponseEntity.ok(ville);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(villeService.searchById(id));
-        villeService.deleteById(id);
+    @DeleteMapping("/deltecity/{name}")
+    public ResponseEntity<Void> delete(@PathVariable("name") String name) throws HotelException {
+        villeService.deleteCityByName(name);
         return ResponseEntity.ok().build();
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated VilleDto villeDto, @PathVariable("id") Integer id) throws HotelException {
+    @PutMapping("/updateville")
+    public ResponseEntity<Void> update(@RequestBody @Validated VilleDto villeDto) throws HotelException {
         villeService.update(villeDto);
         return ResponseEntity.ok().build();
     }

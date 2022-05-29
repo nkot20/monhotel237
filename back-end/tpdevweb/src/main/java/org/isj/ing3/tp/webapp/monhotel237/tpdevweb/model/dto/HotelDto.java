@@ -12,9 +12,10 @@ import java.time.Instant;
 @AllArgsConstructor
 @Data
 public class HotelDto implements Serializable {
-    private Integer id;
+
     private String nom;
     private String tel;
+    private String email;
     private String devise;
     private String slogan;
     private String adresse;

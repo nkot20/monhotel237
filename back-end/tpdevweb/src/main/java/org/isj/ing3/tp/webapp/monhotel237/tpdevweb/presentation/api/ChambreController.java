@@ -23,30 +23,30 @@ public class ChambreController {
         this.chambreService = chambreService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated ChambreDto chambreDto) {
+    @PostMapping("/saveroom")
+    public ResponseEntity<Void> save(@RequestBody ChambreDto chambreDto) throws HotelException {
         chambreService.addData(chambreDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ChambreDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        ChambreDto chambre = chambreService.searchById(id);
+    @GetMapping("/findroom/{numero}")
+    public ResponseEntity<ChambreDto> findByNumber(@PathVariable("numero") Integer numero) throws HotelException {
+        ChambreDto chambre = chambreService.searchChambreByNumberDto(numero);
         return ResponseEntity.ok(chambre);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(chambreService.searchById(id)).orElseThrow(() -> {
+    @DeleteMapping("/deleteroom/{numero}")
+    public ResponseEntity<Void> delete(@PathVariable("numero") Integer numero) throws HotelException {
+        Optional.ofNullable(chambreService.searchChambreByNumber(numero)).orElseThrow(() -> {
             log.error("Unable to delete non-existent data！");
             return new ResourceNotFoundException("Unable to delete non-existent data！");
         });
-        chambreService.deleteById(id);
+        chambreService.deleteByNumber(numero);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated ChambreDto chambreDto) throws HotelException {
+    @PutMapping("/updateroom")
+    public ResponseEntity<Void> update(@RequestBody ChambreDto chambreDto) throws HotelException {
         chambreService.update(chambreDto);
         return ResponseEntity.ok().build();
     }

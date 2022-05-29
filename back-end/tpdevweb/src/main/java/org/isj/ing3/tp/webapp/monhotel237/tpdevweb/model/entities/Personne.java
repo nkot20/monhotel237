@@ -17,7 +17,7 @@ public class Personne {
     @Column(name = "datenaissance", nullable = false)
     private LocalDate datenaissance;
 
-    @Column(name = "email", length = 50)
+    @Column(name = "email", length = 50, unique = true)
     private String email;
 
     @Column(name = "tel1", nullable = false, length = 20)

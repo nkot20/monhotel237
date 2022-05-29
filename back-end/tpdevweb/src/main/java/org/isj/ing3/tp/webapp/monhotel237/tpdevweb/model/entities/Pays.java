@@ -21,7 +21,7 @@ public class Pays implements Serializable {
     @Column(name = "idpays", nullable = false)
     private Integer id;
 
-    @Column(name = "nompays", nullable = false, length = 50)
+    @Column(name = "nompays", nullable = false, length = 50, unique = true)
     private String nompays;
 
     @Column(name = "datemodif", nullable = false)

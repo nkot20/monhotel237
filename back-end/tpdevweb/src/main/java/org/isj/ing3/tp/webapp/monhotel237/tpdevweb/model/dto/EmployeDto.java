@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class EmployeDto implements Serializable {
-    private Integer id;
+
     private String nom;
     private String prenom;
     private LocalDate datenaissance;

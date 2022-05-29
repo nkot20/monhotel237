@@ -4,7 +4,8 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EmployeDto;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.EmployeService;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Employe;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.EmployeServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,33 +17,32 @@ import java.util.Optional;
 @Slf4j
 @Api("employe")
 public class EmployeController {
-    private final EmployeService employeService;
+    private final EmployeServiceImpl employeService;
 
-    public EmployeController(EmployeService employeService) {
+    public EmployeController(EmployeServiceImpl employeService) {
         this.employeService = employeService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated EmployeDto employeDto) {
+    @PostMapping("/saveemploye")
+    public ResponseEntity<Void> save(@RequestBody EmployeDto employeDto) throws HotelException {
         employeService.addData(employeDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EmployeDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        EmployeDto employe = employeService.searchById(id);
+    @GetMapping("/getemploye/{email}")
+    public ResponseEntity<Employe> findByEmail(@PathVariable("email") String email) throws HotelException {
+        Employe employe = employeService.searchByEmail(email);
         return ResponseEntity.ok(employe);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(employeService.searchById(id));
-        employeService.deleteById(id);
+    @DeleteMapping("/deleteemploye/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("email") String email) throws HotelException {
+        employeService.deleteByEmail(email);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated EmployeDto employeDto) throws HotelException {
+    @PutMapping("/updateemployee")
+    public ResponseEntity<Void> update(@RequestBody EmployeDto employeDto) throws HotelException {
         employeService.update(employeDto);
         return ResponseEntity.ok().build();
     }

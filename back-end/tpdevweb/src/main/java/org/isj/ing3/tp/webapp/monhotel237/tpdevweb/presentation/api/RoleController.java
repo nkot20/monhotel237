@@ -1,9 +1,11 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.api;
 
 import io.swagger.annotations.Api;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.RoleDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Role;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.RoleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,27 +24,28 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated RoleDto roleDto) {
+    @SneakyThrows
+    @PostMapping("/saverole")
+    public ResponseEntity<Void> save(@RequestBody RoleDto roleDto) {
         roleService.addData(roleDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RoleDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        RoleDto role = roleService.searchById(id);
+    @GetMapping("/getrole/{intitule}")
+    public ResponseEntity<Role> findByIntitule(@PathVariable("intitule") String intitule) throws HotelException {
+        Role role = roleService.searchRoleByIntitule(intitule);
         return ResponseEntity.ok(role);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(roleService.searchById(id));
-        roleService.deleteById(id);
+    @DeleteMapping("/deleterole/{intitule}")
+    public ResponseEntity<Void> delete(@PathVariable("intitule") String intitule) throws HotelException {
+        Optional.ofNullable(roleService.searchRoleByIntitule(intitule));
+        roleService.deleteRoleByIntitule(intitule);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated RoleDto roleDto, @PathVariable("id") Integer id) throws HotelException {
+    @PutMapping("/updaterole")
+    public ResponseEntity<Void> update(@RequestBody RoleDto roleDto) throws HotelException {
         roleService.update(roleDto);
         return ResponseEntity.ok().build();
     }

@@ -21,7 +21,7 @@ public class Role implements Serializable {
     @Column(name = "idrole", nullable = false)
     private Integer id;
 
-    @Column(name = "intitule", nullable = false, length = 20)
+    @Column(name = "intitule", nullable = false, length = 20, unique = true)
     private String intitule;
 
     @Column(name = "datemodif", nullable = false)

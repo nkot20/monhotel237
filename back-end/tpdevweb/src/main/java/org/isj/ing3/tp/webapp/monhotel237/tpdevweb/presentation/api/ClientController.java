@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ClientDto;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.ClientService;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.ClientServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,33 +16,32 @@ import java.util.Optional;
 @Slf4j
 @Api("client")
 public class ClientController {
-    private final ClientService clientService;
+    private final ClientServiceImpl clientService;
 
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientServiceImpl clientService) {
         this.clientService = clientService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated ClientDto clientDto) {
+    @PostMapping("/savecustomer")
+    public ResponseEntity<Void> save(@RequestBody @Validated ClientDto clientDto) throws HotelException {
         clientService.addData(clientDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ClientDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        ClientDto client = clientService.searchById(id);
+    @GetMapping("/searchcustomer/{email}")
+    public ResponseEntity<ClientDto> findByEmail(@PathVariable("email") String email) throws HotelException {
+        ClientDto client = clientService.searchByEmailDto(email);
         return ResponseEntity.ok(client);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(clientService.searchById(id));
-        clientService.deleteById(id);
+    @DeleteMapping("/deletecustomer/{email}")
+    public ResponseEntity<Void> delete(@PathVariable("email") String email) throws HotelException {
+        clientService.deleteByEmail(email);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated ClientDto clientDto, @PathVariable("id") Integer id) throws HotelException {
+    @PutMapping("/updatecustomer")
+    public ResponseEntity<Void> update(@RequestBody @Validated ClientDto clientDto) throws HotelException {
         clientService.update(clientDto);
         return ResponseEntity.ok().build();
     }

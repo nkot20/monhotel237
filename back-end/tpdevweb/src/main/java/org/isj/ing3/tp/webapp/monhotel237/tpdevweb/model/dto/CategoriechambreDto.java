@@ -10,7 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoriechambreDto implements Serializable {
-    private Integer id;
     private String libelle;
     private String description;
     private Integer datemodif;

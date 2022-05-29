@@ -8,6 +8,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Categorie;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.CategorieMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.CategorieRepository;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.ICategorie;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.utils.CHeckNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,35 +20,55 @@ import javax.transaction.Transactional;
 public class CategorieServiceImpl implements ICategorie {
 
     @Autowired
-    private CategorieRepository repository;
+    private CategorieRepository categorieRepository;
     @Autowired
     private CategorieMapper categorieMapper;
 
     @Override
-    public CategorieDto addData(CategorieDto categorieDto) {
-        return categorieMapper.toDto(repository.save(categorieMapper.toEntity(categorieDto)));
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-        repository.deleteById(id);
+    public CategorieDto addData(CategorieDto categorieDto) throws HotelException {
+        CHeckNull.checkIntitule(categorieDto.getIntitule());
+        checkIntituleIsAlreadyUsed(categorieDto.getIntitule());
+        return categorieMapper.toDto(categorieRepository.save(categorieMapper.toEntity(categorieDto)));
     }
 
     @Override
     public CategorieDto searchById(Integer id) throws HotelException {
-        return categorieMapper.toDto(repository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+        return categorieMapper.toDto(categorieRepository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public Categorie searchCategorieByIntitule(String intitule) throws HotelException {
+        CHeckNull.checkIntitule(intitule);
+        return categorieRepository.findCategorieByIntitule(intitule).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
+    }
+
+    @Override
+    public CategorieDto searchCategorieByIntitule2(String intitule) throws HotelException {
+        CHeckNull.checkIntitule(intitule);
+        return categorieMapper.toDto(categorieRepository.findCategorieByIntitule(intitule).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public void deleteByIntitule(String intitule) throws HotelException {
+        Categorie categorie = searchCategorieByIntitule(intitule);
+        categorieRepository.deleteById(categorie.getId());
     }
 
     @Override
     public CategorieDto update(CategorieDto categorieDto) throws HotelException {
-        CategorieDto data = searchById(categorieDto.getId());
-        Categorie entity = categorieMapper.toEntity(categorieDto);
-        categorieMapper.copy(data, entity);
-        return addData(categorieMapper.toDto(entity));
+        Categorie entity = searchCategorieByIntitule(categorieDto.getIntitule());
+        categorieMapper.copy(categorieDto, entity);
+        return categorieMapper.toDto(categorieRepository.save(entity));
+    }
+
+    private void checkIntituleIsAlreadyUsed(String intitule) throws HotelException {
+        if (categorieRepository.findCategorieByIntitule(intitule).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
     }
 
     @Override
     public CategorieDto getAll() {
         return null;
     }
+
+
 }

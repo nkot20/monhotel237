@@ -11,7 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Data
 public class RoleDto implements Serializable {
-    private Integer id;
+
     private String intitule;
     private Instant datemodif;
     private String user;

@@ -21,7 +21,7 @@ public class Chambre implements Serializable {
     @Column(name = "idchambre", nullable = false)
     private Integer id;
 
-    @Column(name = "numero", nullable = false)
+    @Column(name = "numero", nullable = false, unique = true)
     private Integer numero;
 
     @Column(name = "etage", nullable = false)

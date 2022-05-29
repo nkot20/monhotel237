@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class EntretienDto implements Serializable {
-    private Integer id;
+    private Integer numero;
     private LocalDate datedebut;
     private LocalDate datefin;
     private Integer statut;

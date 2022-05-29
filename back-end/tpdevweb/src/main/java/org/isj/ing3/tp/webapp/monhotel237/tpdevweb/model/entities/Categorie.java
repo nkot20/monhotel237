@@ -21,8 +21,8 @@ public class Categorie implements Serializable {
     @Column(name = "idcat", nullable = false)
     private Integer id;
 
-    @Column(name = "intitule", nullable = false)
-    private Integer intitule;
+    @Column(name = "intitule", nullable = false, unique = true)
+    private String intitule;
 
     @Column(name = "datemodif", nullable = false)
     private Instant datemodif;

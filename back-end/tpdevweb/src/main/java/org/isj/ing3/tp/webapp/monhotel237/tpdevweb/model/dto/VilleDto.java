@@ -11,7 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Data
 public class VilleDto implements Serializable {
-    private Integer id;
+
     private String nomville;
     private Instant datemodif;
     private String user;

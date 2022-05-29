@@ -9,6 +9,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Categoriechamb
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.CategoriechambreRepository;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.CategoriechambreMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.ICategorieChambre;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.utils.CHeckNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,35 +21,55 @@ import javax.transaction.Transactional;
 public class CategoriechambreServiceImpl implements ICategorieChambre {
 
     @Autowired
-    private CategoriechambreRepository repository;
+    private CategoriechambreRepository categoriechambreRepository;
     @Autowired
     private CategoriechambreMapper categoriechambreMapper;
 
     @Override
-    public CategoriechambreDto addData(CategoriechambreDto categoriechambreDto) {
-        return categoriechambreMapper.toDto(repository.save(categoriechambreMapper.toEntity(categoriechambreDto)));
+    public CategoriechambreDto addData(CategoriechambreDto categoriechambreDto) throws HotelException {
+        CHeckNull.checkLibelle(categoriechambreDto.getLibelle());
+        checkLibelleIsAlreadyUsed(categoriechambreDto.getLibelle());
+        return categoriechambreMapper.toDto(categoriechambreRepository.save(categoriechambreMapper.toEntity(categoriechambreDto)));
     }
 
-    @Override
-    public void deleteById(Integer id) {
-        repository.deleteById(id);
-    }
 
     @Override
     public CategoriechambreDto searchById(Integer id) throws HotelException {
-        return categoriechambreMapper.toDto(repository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+        return categoriechambreMapper.toDto(categoriechambreRepository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public Categoriechambre searchCategoriechambreByLibelle(String libelle) throws HotelException {
+        CHeckNull.checkLibelle(libelle);
+        return categoriechambreRepository.findCategoriechambreByLibelle(libelle).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
+    }
+
+    public CategoriechambreDto searchCategoriechambreByLibelle2(String libelle) throws HotelException {
+        CHeckNull.checkLibelle(libelle);
+        return categoriechambreMapper.toDto(categoriechambreRepository.findCategoriechambreByLibelle(libelle).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public void deleteByLibelle(String libelle) throws HotelException {
+        Categoriechambre categoriechambre = searchCategoriechambreByLibelle(libelle);
+        categoriechambreRepository.deleteById(categoriechambre.getId());
     }
 
     @Override
     public CategoriechambreDto update(CategoriechambreDto categoriechambreDto) throws HotelException {
-        CategoriechambreDto data = searchById(categoriechambreDto.getId());
-        Categoriechambre entity = categoriechambreMapper.toEntity(categoriechambreDto);
-        categoriechambreMapper.copy(data, entity);
-        return addData(categoriechambreMapper.toDto(entity));
+        Categoriechambre entity = searchCategoriechambreByLibelle(categoriechambreDto.getLibelle());
+        categoriechambreMapper.copy(categoriechambreDto, entity);
+        return categoriechambreMapper.toDto(categoriechambreRepository.save(entity));
+    }
+
+    private void checkLibelleIsAlreadyUsed(String libelle) throws HotelException {
+        if (categoriechambreRepository.findCategoriechambreByLibelle(libelle).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
     }
 
     @Override
     public CategoriechambreDto getAll() {
         return null;
     }
+
+
 }

@@ -22,6 +22,9 @@ public class Entretien implements Serializable {
     @Column(name = "identretien", nullable = false)
     private Integer id;
 
+    @Column(name = "numero", nullable = false, unique = true)
+    private Integer numero;
+
     @Column(name = "datedebut", nullable = false)
     private LocalDate datedebut;
 

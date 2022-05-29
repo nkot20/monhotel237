@@ -11,7 +11,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @Data
 public class ChambreDto implements Serializable {
-    private Integer id;
     private Integer numero;
     private Integer etage;
     private Integer nblits;

@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.UtilisateurhotelgroupeDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Utilisateurhotelgroupe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.UtilisateurhotelgroupeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,28 +23,28 @@ public class UtilisateurhotelgroupeController {
         this.utilisateurhotelgroupeService = utilisateurhotelgroupeService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Validated UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) {
+    @PostMapping("/adduser")
+    public ResponseEntity<Void> save(@RequestBody UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
         utilisateurhotelgroupeService.addData(utilisateurhotelgroupeDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UtilisateurhotelgroupeDto> findById(@PathVariable("id") Integer id) throws HotelException {
-        UtilisateurhotelgroupeDto utilisateurhotelgroupe = utilisateurhotelgroupeService.searchById(id);
+    @GetMapping("/getuser/{email}")
+    public ResponseEntity<Utilisateurhotelgroupe> findByEmail(@PathVariable("email") String email) throws HotelException {
+        Utilisateurhotelgroupe utilisateurhotelgroupe = utilisateurhotelgroupeService.searchByEmail(email);
         return ResponseEntity.ok(utilisateurhotelgroupe);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws HotelException {
-        Optional.ofNullable(utilisateurhotelgroupeService.searchById(id));
-        utilisateurhotelgroupeService.deleteById(id);
+    @DeleteMapping("/deleteuser/{email}")
+    public ResponseEntity<Void> delete(@PathVariable("email") String email) throws HotelException {
+        Optional.ofNullable(utilisateurhotelgroupeService.searchByEmail(email));
+        utilisateurhotelgroupeService.deleteByEmail(email);
         return ResponseEntity.ok().build();
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Validated UtilisateurhotelgroupeDto utilisateurhotelgroupeDto, @PathVariable("id") Integer id) throws HotelException {
+    @PutMapping("/update")
+    public ResponseEntity<Void> update(@RequestBody UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
         utilisateurhotelgroupeService.update(utilisateurhotelgroupeDto);
         return ResponseEntity.ok().build();
     }

@@ -8,6 +8,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Hotel;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.HotelMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.*;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IHotel;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.utils.CHeckNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +20,40 @@ import javax.transaction.Transactional;
 public class HotelService implements IHotel {
 
     @Autowired
-    private HotelRepository repository;
+    private HotelRepository hotelRepository;
     @Autowired
     private HotelMapper hotelMapper;
 
     @Override
-    public HotelDto addData(HotelDto hotelDto) {
-        return hotelMapper.toDto(repository.save(hotelMapper.toEntity(hotelDto)));
+    public HotelDto addData(HotelDto hotelDto) throws HotelException {
+        CHeckNull.checkEmail(hotelDto.getEmail());
+        checkEmailIsAlreadyUsed(hotelDto.getEmail());
+        return hotelMapper.toDto(hotelRepository.save(hotelMapper.toEntity(hotelDto)));
     }
 
-    @Override
-    public void deleteById(Integer id) {
-        repository.deleteById(id);
-    }
 
     @Override
     public HotelDto searchById(Integer id) throws HotelException {
-        return hotelMapper.toDto(repository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+        return hotelMapper.toDto(hotelRepository.findById(id).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public Hotel searchByEmail(String email) throws HotelException {
+        CHeckNull.checkEmail(email);
+        return hotelRepository.findHotelByEmail(email).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
+    }
+
+    @Override
+    public void deleteByEmail(String email) throws HotelException {
+        Hotel hotel = searchByEmail(email);
+        hotelRepository.deleteById(hotel.getId());
     }
 
     @Override
     public HotelDto update(HotelDto hotelDto) throws HotelException {
-        HotelDto data = searchById(hotelDto.getId());
-        Hotel entity = hotelMapper.toEntity(hotelDto);
-        hotelMapper.copy(data, entity);
-        return addData(hotelMapper.toDto(entity));
+        Hotel entity = searchByEmail(hotelDto.getEmail());
+        hotelMapper.copy(hotelDto, entity);
+        return hotelMapper.toDto(hotelRepository.save(entity));
     }
 
     @Override
@@ -51,8 +61,10 @@ public class HotelService implements IHotel {
         return null;
     }
 
-    @Override
-    public HotelDto searchByEmail(String email) {
-        return null;
+    private void checkEmailIsAlreadyUsed(String email) throws HotelException {
+        if (hotelRepository.findHotelByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
     }
+
+
+
 }
