@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,5 +14,5 @@ import java.time.LocalDate;
 public class ReservationIdDto implements Serializable {
     private Integer client;
     private Integer chambre;
-    private LocalDate datedebut;
+    private Date datedebut;
 }

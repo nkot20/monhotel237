@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -66,7 +67,8 @@ public class Hotel implements Serializable {
     private Categorie categorie;
 
     @Column(name = "datemadif", nullable = false)
-    private Instant datemadif;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datemadif = new Date();
 
     @Column(name = "user", nullable = false, length = 50)
     private String user;

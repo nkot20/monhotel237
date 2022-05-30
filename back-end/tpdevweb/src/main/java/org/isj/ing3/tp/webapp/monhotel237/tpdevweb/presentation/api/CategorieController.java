@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RequestMapping("/api/categorie")
 @RestController
+@RequestMapping("/api/categorie")
 @Slf4j
 @Api("categorie")
 public class CategorieController {
@@ -21,11 +21,9 @@ public class CategorieController {
     @Autowired
     private ICategorie iCategorie;
 
-
-
     @PostMapping(value = "/savecat")
     public ResponseEntity<Void> save(@RequestBody CategorieDto categorieDto) throws HotelException {
-        System.out.println(categorieDto);
+        System.out.println("categorieDto.getIntitule()");
         iCategorie.addData(categorieDto);
         return ResponseEntity.ok().build();
     }

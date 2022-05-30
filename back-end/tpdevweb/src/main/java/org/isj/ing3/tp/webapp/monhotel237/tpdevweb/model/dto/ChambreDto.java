@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class ChambreDto implements Serializable {
     private Integer etage;
     private Integer nblits;
     private Integer nbplace;
-    private Instant datemodif;
+    private Date datemodif;
     private String username;
     private HotelDto hotel;
     private CategorieDto categorie;

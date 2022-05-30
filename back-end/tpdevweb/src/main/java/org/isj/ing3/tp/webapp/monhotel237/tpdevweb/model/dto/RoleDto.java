@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +14,6 @@ import java.time.Instant;
 public class RoleDto implements Serializable {
 
     private String intitule;
-    private Instant datemodif;
+    private Date datemodif;
     private String user;
 }

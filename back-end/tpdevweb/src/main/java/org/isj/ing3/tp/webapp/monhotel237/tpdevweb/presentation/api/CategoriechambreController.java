@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategoriechambreDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.ICategorieChambre;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Api("categoriechambre")
 public class CategoriechambreController {
 
-
+    @Autowired
     private ICategorieChambre iCategorieChambre;
 
     @PostMapping("/savecategoryroom")

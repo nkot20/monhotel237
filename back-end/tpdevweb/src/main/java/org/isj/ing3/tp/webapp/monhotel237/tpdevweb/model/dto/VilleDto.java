@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +14,7 @@ import java.time.Instant;
 public class VilleDto implements Serializable {
 
     private String nomville;
-    private Instant datemodif;
+    private Date datemodif;
     private String user;
     private PaysDto pays;
 }

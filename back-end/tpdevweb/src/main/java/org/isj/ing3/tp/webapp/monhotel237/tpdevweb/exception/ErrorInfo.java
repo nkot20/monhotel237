@@ -1,6 +1,8 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.zalando.problem.Status;
 
 @Getter

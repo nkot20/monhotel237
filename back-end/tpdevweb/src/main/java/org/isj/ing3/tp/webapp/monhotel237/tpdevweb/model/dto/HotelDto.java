@@ -7,6 +7,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategorieDto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +28,6 @@ public class HotelDto implements Serializable {
     private String siteweb;
     private VilleDto ville;
     private CategorieDto categorie;
-    private Instant datemadif;
+    private Date datemadif;
     private String user;
 }

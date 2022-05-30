@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -28,7 +29,8 @@ public class Categoriechambre implements Serializable {
     private String description;
 
     @Column(name = "datemodif", nullable = false)
-    private Integer datemodif;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datemodif = new Date();
 
     @Column(name = "username", nullable = false, length = 50)
     private String username;

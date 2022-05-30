@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ClientDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.ClientServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,8 @@ import java.util.Optional;
 @Slf4j
 @Api("client")
 public class ClientController {
-    private final ClientServiceImpl clientService;
-
-    public ClientController(ClientServiceImpl clientService) {
-        this.clientService = clientService;
-    }
+    @Autowired
+    private ClientServiceImpl clientService;
 
     @PostMapping("/savecustomer")
     public ResponseEntity<Void> save(@RequestBody @Validated ClientDto clientDto) throws HotelException {

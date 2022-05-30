@@ -6,6 +6,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.HotelDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Hotel;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IHotel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Api("hotel")
 public class HotelController {
-
+    @Autowired
     private IHotel iHotel;
 
     @PostMapping("/savehotel")

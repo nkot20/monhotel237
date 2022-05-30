@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -34,7 +35,8 @@ public class Chambre implements Serializable {
     private Integer nbplace;
 
     @Column(name = "datemodif", nullable = false)
-    private Instant datemodif;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datemodif = new Date();
 
     @Column(name = "username", nullable = false, length = 50)
     private String username;

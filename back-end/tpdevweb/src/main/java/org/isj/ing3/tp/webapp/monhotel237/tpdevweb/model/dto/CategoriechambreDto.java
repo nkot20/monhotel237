@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +13,7 @@ import java.io.Serializable;
 public class CategoriechambreDto implements Serializable {
     private String libelle;
     private String description;
-    private Integer datemodif;
+    private Date datemodif;
     private String username;
     private byte[] imge;
     private HotelDto hotel;

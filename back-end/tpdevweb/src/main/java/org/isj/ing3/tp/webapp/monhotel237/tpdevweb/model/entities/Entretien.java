@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -26,10 +27,10 @@ public class Entretien implements Serializable {
     private Integer numero;
 
     @Column(name = "datedebut", nullable = false)
-    private LocalDate datedebut;
+    private Date datedebut;
 
     @Column(name = "datefin", nullable = false)
-    private LocalDate datefin;
+    private Date datefin;
 
     @Column(name = "statut", nullable = false)
     private Integer statut;
@@ -39,7 +40,8 @@ public class Entretien implements Serializable {
     private Employe employe;
 
     @Column(name = "datemodif", nullable = false)
-    private Instant datemodif;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datemodif = new Date();
 
     @Column(name = "user", nullable = false, length = 50)
     private String user;

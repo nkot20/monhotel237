@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @MappedSuperclass
 @Data
@@ -35,7 +36,8 @@ public class Personne {
     private Hotel hotel;
 
     @Column(name = "datemodif", nullable = false)
-    private Instant datemodif;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datemodif = new Date();
 
     @Column(name = "user", nullable = false, length = 50)
     private String user;

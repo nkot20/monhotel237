@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +30,7 @@ public class Reservation implements Serializable {
     private Integer nbenfant;
 
     @Column(name = "datefin", nullable = false)
-    private LocalDate datefin;
+    private Date datefin;
 
     @Column(name = "quantite", nullable = false)
     private Integer quantite;

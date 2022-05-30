@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Data
@@ -23,7 +24,7 @@ public class ReservationId implements Serializable {
     @Column(name = "chambre", nullable = false)
     private Integer chambre;
     @Column(name = "datedebut", nullable = false)
-    private LocalDate datedebut;
+    private Date datedebut;
 
 
 

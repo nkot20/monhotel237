@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,13 +16,13 @@ public class UtilisateurhotelgroupeDto implements Serializable {
 
     private String nom;
     private String prenom;
-    private LocalDate datenaissance;
+    private Date datenaissance;
     private String email;
     private String tel1;
     private String tel2;
     private Character sexe;
     private HotelDto hotel;
-    private Instant datemodif;
+    private Date datemodif;
     private String user;
     private RoleDto role;
 }

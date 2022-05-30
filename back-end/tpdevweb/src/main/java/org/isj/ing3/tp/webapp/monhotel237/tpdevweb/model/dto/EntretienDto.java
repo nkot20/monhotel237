@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class EntretienDto implements Serializable {
     private Integer numero;
-    private LocalDate datedebut;
-    private LocalDate datefin;
+    private Date datedebut;
+    private Date datefin;
     private Integer statut;
     private EmployeDto employe;
-    private Instant datemodif;
+    private Date datemodif;
     private String user;
 }
