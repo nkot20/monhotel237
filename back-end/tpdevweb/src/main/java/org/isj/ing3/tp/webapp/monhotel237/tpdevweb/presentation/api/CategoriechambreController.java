@@ -4,9 +4,8 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategoriechambreDto;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.CategoriechambreServiceImpl;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.ICategorieChambre;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -16,35 +15,32 @@ import java.util.Optional;
 @Slf4j
 @Api("categoriechambre")
 public class CategoriechambreController {
-    private final CategoriechambreServiceImpl categoriechambreService;
 
-    public CategoriechambreController(CategoriechambreServiceImpl categoriechambreService) {
-        this.categoriechambreService = categoriechambreService;
-    }
+
+    private ICategorieChambre iCategorieChambre;
 
     @PostMapping("/savecategoryroom")
     public ResponseEntity<Void> save(@RequestBody CategoriechambreDto categoriechambreDto) throws HotelException {
-        categoriechambreService.addData(categoriechambreDto);
+        iCategorieChambre.addData(categoriechambreDto);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("findcategoryroom/{libelle}")
+    @GetMapping("/findcategoryroom/{libelle}")
     public ResponseEntity<CategoriechambreDto> findByLibelle(@PathVariable("libelle") String libelle) throws HotelException {
-        CategoriechambreDto categoriechambre = categoriechambreService.searchCategoriechambreByLibelle2(libelle);
+        CategoriechambreDto categoriechambre = iCategorieChambre.searchCategoriechambreByLibelle2(libelle);
         return ResponseEntity.ok(categoriechambre);
     }
 
-    @DeleteMapping("deletecategoryroom/{libelle}")
+    @DeleteMapping("/deletecategoryroom/{libelle}")
     public ResponseEntity<Void> delete(@PathVariable("libelle") String libelle) throws HotelException {
-        Optional.ofNullable(categoriechambreService.searchCategoriechambreByLibelle(libelle));
-        categoriechambreService.deleteByLibelle(libelle);
+        iCategorieChambre.deleteByLibelle(libelle);
         return ResponseEntity.ok().build();
     }
 
 
     @PutMapping("/updatecatroom")
     public ResponseEntity<Void> update(@RequestBody CategoriechambreDto categoriechambreDto) throws HotelException {
-        categoriechambreService.update(categoriechambreDto);
+        iCategorieChambre.update(categoriechambreDto);
         return ResponseEntity.ok().build();
     }
 }

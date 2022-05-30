@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ResourceNotFoundException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategorieDto;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.CategorieServiceImpl;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.ICategorie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,37 +17,34 @@ import java.util.Optional;
 @Slf4j
 @Api("categorie")
 public class CategorieController {
-    private final CategorieServiceImpl categorieService;
 
-    public CategorieController(CategorieServiceImpl categorieService) {
-        this.categorieService = categorieService;
-    }
+    @Autowired
+    private ICategorie iCategorie;
 
-    @PostMapping("/savecat")
+
+
+    @PostMapping(value = "/savecat")
     public ResponseEntity<Void> save(@RequestBody CategorieDto categorieDto) throws HotelException {
-        categorieService.addData(categorieDto);
+        System.out.println(categorieDto);
+        iCategorie.addData(categorieDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/findcat/{intitule}")
     public ResponseEntity<CategorieDto> findByIntitule(@PathVariable("intitule") String intitule) throws HotelException {
-        CategorieDto categorie = categorieService.searchCategorieByIntitule2(intitule);
+        CategorieDto categorie = iCategorie.searchCategorieByIntitule2(intitule);
         return ResponseEntity.ok(categorie);
     }
 
     @DeleteMapping("/deletecat/{intitule}")
     public ResponseEntity<Void> delete(@PathVariable("intitule") String intitule) throws HotelException {
-        Optional.ofNullable(categorieService.searchCategorieByIntitule(intitule)).orElseThrow(() -> {
-            log.error("Unable to delete non-existent data！");
-            return new ResourceNotFoundException("Unable to delete non-existent data！");
-        });
-        categorieService.deleteByIntitule(intitule);
+        iCategorie.deleteByIntitule(intitule);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/updatecat")
+    @PutMapping(value = "/updatecat")
     public ResponseEntity<Void> update(@RequestBody CategorieDto categorieDto) throws HotelException {
-        categorieService.update(categorieDto);
+        iCategorie.update(categorieDto);
         return ResponseEntity.ok().build();
     }
 }

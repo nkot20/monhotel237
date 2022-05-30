@@ -41,7 +41,7 @@ public class ClientController {
     }
 
     @PutMapping("/updatecustomer")
-    public ResponseEntity<Void> update(@RequestBody @Validated ClientDto clientDto) throws HotelException {
+    public ResponseEntity<Void> update(@RequestBody ClientDto clientDto) throws HotelException {
         clientService.update(clientDto);
         return ResponseEntity.ok().build();
     }

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
 
+@MappedSuperclass
 @Data
 public class Personne {
     @Column(name = "nom", nullable = false, length = 50)

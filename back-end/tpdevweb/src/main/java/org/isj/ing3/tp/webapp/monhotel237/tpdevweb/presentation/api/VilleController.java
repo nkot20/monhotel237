@@ -5,46 +5,43 @@ import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.VilleDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Ville;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.VilleService;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IVille;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-@RequestMapping("/api/ville")
 @RestController
+@RequestMapping("/api/ville")
 @Slf4j
 @Api("ville")
 public class VilleController {
-    private final VilleService villeService;
 
-    public VilleController(VilleService villeService) {
-        this.villeService = villeService;
-    }
+    @Autowired
+    private IVille iVille;
 
-    @PostMapping("/savecity")
+    @PostMapping(value = "/savecity")
     public ResponseEntity<Void> save(@RequestBody VilleDto villeDto) throws HotelException {
-        villeService.addData(villeDto);
+        iVille.addData(villeDto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/getville/{name}")
     public ResponseEntity<Ville> findByName(@PathVariable("name") String name) throws HotelException {
-        Ville ville = villeService.searchCityByName(name);
+        Ville ville = iVille.searchCityByName(name);
         return ResponseEntity.ok(ville);
     }
 
     @DeleteMapping("/deltecity/{name}")
     public ResponseEntity<Void> delete(@PathVariable("name") String name) throws HotelException {
-        villeService.deleteCityByName(name);
+        iVille.deleteCityByName(name);
         return ResponseEntity.ok().build();
     }
 
 
-    @PutMapping("/updateville")
-    public ResponseEntity<Void> update(@RequestBody @Validated VilleDto villeDto) throws HotelException {
-        villeService.update(villeDto);
+    @PutMapping(value = "/updateville")
+    public ResponseEntity<Void> update(@RequestBody VilleDto villeDto) throws HotelException {
+        iVille.update(villeDto);
         return ResponseEntity.ok().build();
     }
 }
