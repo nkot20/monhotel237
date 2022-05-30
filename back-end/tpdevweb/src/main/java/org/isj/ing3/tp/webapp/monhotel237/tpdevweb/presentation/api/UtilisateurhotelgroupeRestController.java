@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Api("utilisateurhotelgroupe")
-public class UtilisateurhotelgroupeController {
+public class UtilisateurhotelgroupeRestController {
 
     @Autowired
     private IUtilisateurHotelGroupe iUtilisateurHotelGroupe;

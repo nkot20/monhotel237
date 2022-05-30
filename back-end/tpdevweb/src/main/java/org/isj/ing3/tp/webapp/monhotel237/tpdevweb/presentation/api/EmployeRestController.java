@@ -18,7 +18,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Api("employe")
-public class EmployeController {
+public class EmployeRestController {
 
     @Autowired
     private IEmploye employeService;

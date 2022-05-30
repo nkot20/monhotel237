@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Api("client")
-public class ClientController {
+public class ClientRestController {
     @Autowired
     private ClientServiceImpl clientService;
 

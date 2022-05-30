@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @Api("entretien")
-public class EntretienController {
+public class EntretienRestController {
 
     @Autowired
     private IEntretien iEntretien;

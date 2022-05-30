@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @Api("pays")
-public class PaysController {
+public class PaysRestController {
 
     @Autowired
     private IPays iPays;

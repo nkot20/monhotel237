@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Api("role")
-public class RoleController {
+public class RoleRestController {
 
     @Autowired
     private IRole iRole;

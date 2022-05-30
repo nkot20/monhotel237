@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/ville")
 @Slf4j
 @Api("ville")
-public class VilleController {
+public class VilleRestController {
 
     @Autowired
     private IVille iVille;
