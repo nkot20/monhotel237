@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api/role")
@@ -45,5 +46,9 @@ public class RoleRestController {
     public ResponseEntity<Void> update(@RequestBody RoleDto roleDto) throws HotelException {
         iRole.update(roleDto);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/allrole")
+    public ResponseEntity<List<RoleDto>> listeRole() {
+        return ResponseEntity.ok(iRole.listRoles());
     }
 }

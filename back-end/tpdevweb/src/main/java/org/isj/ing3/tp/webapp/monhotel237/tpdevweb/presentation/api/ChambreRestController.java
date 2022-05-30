@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api/chambre")
@@ -48,4 +49,11 @@ public class ChambreRestController {
         iChambre.update(chambreDto);
         return ResponseEntity.ok().build();
     }
+
+   /* @PostMapping("/rechercherroom/{keyword}")
+    public ResponseEntity<ChambreDto> findChambreByKeyword(@PathVariable("keyword") String keyword) {
+        List<ChambreDto> chambre = iChambre.searchChambresByKeyword(keyword);
+        return ResponseEntity.ok(chambre);
+    }*/
+
 }

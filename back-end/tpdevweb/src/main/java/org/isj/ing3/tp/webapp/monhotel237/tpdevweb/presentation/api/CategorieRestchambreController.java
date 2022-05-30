@@ -46,4 +46,5 @@ public class CategorieRestchambreController {
         return ResponseEntity.ok().build();
     }
 
+
 }

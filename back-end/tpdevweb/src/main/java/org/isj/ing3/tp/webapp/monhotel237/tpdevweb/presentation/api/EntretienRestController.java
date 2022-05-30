@@ -4,11 +4,14 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EntretienDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.RoleDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Entretien;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IEntretien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/api/entretien")
 @RestController
@@ -42,5 +45,9 @@ public class EntretienRestController {
     public ResponseEntity<Void> update(@RequestBody EntretienDto entretienDto) throws HotelException {
         iEntretien.update(entretienDto);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/allentretien")
+    public ResponseEntity<List<EntretienDto>> listeentretien() {
+        return ResponseEntity.ok(iEntretien.listentretien());
     }
 }

@@ -3,6 +3,7 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ChambreDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.RoleDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Role;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.RoleMapper;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -59,6 +62,13 @@ public class RoleService implements IRole {
     public RoleDto getAll() {
         return null;
     }
+
+    @Override
+    public List<RoleDto> listRoles() {
+        return roleRepository.findAll().stream().map(role -> roleMapper.toDto(role))
+                .collect(Collectors.toList());
+    }
+
 
     private void checkIntituleIsAlreadyUsed(String intitule) throws HotelException {
         if (roleRepository.findRoleByIntitule(intitule).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
