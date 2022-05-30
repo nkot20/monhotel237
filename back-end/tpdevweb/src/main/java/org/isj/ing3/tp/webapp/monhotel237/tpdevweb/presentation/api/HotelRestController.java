@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @Api("hotel")
-public class HotelController {
+public class HotelRestController {
     @Autowired
     private IHotel iHotel;
 

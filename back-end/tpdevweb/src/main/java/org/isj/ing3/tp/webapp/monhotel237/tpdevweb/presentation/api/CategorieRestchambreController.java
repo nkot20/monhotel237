@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Api("categoriechambre")
-public class CategoriechambreController {
+public class CategorieRestchambreController {
 
     @Autowired
     private ICategorieChambre iCategorieChambre;

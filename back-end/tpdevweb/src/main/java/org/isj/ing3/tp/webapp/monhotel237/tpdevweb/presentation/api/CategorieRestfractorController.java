@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/api/categorie")
 @Slf4j
 @Api("categorie")
-public class CategorieController {
+public class CategorieRestfractorController {
 
     @Autowired
     private ICategorie iCategorie;

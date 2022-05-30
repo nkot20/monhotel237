@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @Slf4j
 @Api("chambre")
-public class ChambreController {
+public class ChambreRestController {
 
     @Autowired
     private IChambre iChambre;
