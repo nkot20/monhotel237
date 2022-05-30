@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -71,5 +73,11 @@ public class CategoriechambreServiceImpl implements ICategorieChambre {
         return null;
     }
 
+    @Override
+    public List<CategoriechambreDto> listCategoriechambres() {
+
+        return categoriechambreRepository.findAll().stream().map(categoriechambre -> categoriechambreMapper.toDto(categoriechambre))
+                .collect(Collectors.toList());
+    }
 
 }

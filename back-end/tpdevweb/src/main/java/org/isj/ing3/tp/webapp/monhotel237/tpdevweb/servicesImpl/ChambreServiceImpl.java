@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -71,5 +73,17 @@ public class ChambreServiceImpl implements IChambre {
         return null;
     }
 
+    @Override
+    public List<ChambreDto> listChambres() {
+        return chambreRepository.findAll().stream().map(chambre -> chambreMapper.toDto(chambre))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ChambreDto> searchChambresByKeyword(String keyword) {
+        return chambreRepository.findChambreByNumero(keyword).get().stream()
+                .map(chambreMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
 }
