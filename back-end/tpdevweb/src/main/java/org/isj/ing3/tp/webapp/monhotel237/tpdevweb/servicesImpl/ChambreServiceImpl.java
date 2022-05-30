@@ -81,7 +81,7 @@ public class ChambreServiceImpl implements IChambre {
 
     @Override
     public List<ChambreDto> searchChambresByKeyword(String keyword) {
-        return chambreRepository.findChambreByNumero(keyword).get().stream()
+        return chambreRepository.findChambreByKeyword(keyword).get().stream()
                 .map(chambreMapper::toDto)
                 .collect(Collectors.toList());
     }
