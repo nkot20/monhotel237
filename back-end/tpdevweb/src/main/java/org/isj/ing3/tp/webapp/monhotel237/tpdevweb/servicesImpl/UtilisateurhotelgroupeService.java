@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -65,7 +64,7 @@ public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
     }
 
     @Override
-    public List<UtilisateurhotelgroupeDto> getAll() {
+    public UtilisateurhotelgroupeDto getAll() {
         return null;
     }
 
