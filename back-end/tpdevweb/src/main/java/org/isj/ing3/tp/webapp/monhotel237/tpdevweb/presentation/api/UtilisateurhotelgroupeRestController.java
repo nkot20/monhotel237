@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api/utilisateurhotelgroupe")
@@ -32,6 +33,10 @@ public class UtilisateurhotelgroupeRestController {
     public ResponseEntity<Utilisateurhotelgroupe> findByEmail(@PathVariable("email") String email) throws HotelException {
         Utilisateurhotelgroupe utilisateurhotelgroupe = iUtilisateurHotelGroupe.searchByEmail(email);
         return ResponseEntity.ok(utilisateurhotelgroupe);
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<UtilisateurhotelgroupeDto>> getAllUtilisateurhotelgroupe() {
+        return ResponseEntity.ok(iUtilisateurHotelGroupe.listUtilisateurhotelgroupeDto());
     }
 
     @DeleteMapping("/deleteuser/{email}")

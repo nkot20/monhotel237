@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -51,6 +53,12 @@ public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
         utilisateurhotelgroupeRepository.deleteById(utilisateurhotelgroupe.getId());
     }
 
+    @Override
+    public List<UtilisateurhotelgroupeDto> listUtilisateurhotelgroupeDto() {
+        /*List<Utilisateurhotelgroupe> utilisateurhotelgroupes = utilisateurhotelgroupeRepository.findAll();*/
+        return utilisateurhotelgroupeRepository.findAll().stream().map(utilisateurhotelgroupe -> utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupe)).collect(Collectors.toList());
+    }
+
 
     @Override
     public UtilisateurhotelgroupeDto update(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
@@ -59,13 +67,13 @@ public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
         return utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupeRepository.save(entity));
     }
 
-    private void checkeEmailIsAlreadyUsed(String email) throws HotelException {
-        if (utilisateurhotelgroupeRepository.findUtilisateurhotelgroupeByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
-    }
-
     @Override
     public UtilisateurhotelgroupeDto getAll() {
         return null;
+    }
+
+    private void checkeEmailIsAlreadyUsed(String email) throws HotelException {
+        if (utilisateurhotelgroupeRepository.findUtilisateurhotelgroupeByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
     }
 
 }
