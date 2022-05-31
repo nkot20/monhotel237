@@ -79,11 +79,11 @@ public class ChambreServiceImpl implements IChambre {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<ChambreDto> searchChambresByKeyword(String keyword) {
-        return chambreRepository.findChambreByKeyword(keyword).get().stream()
+    /*@Override
+    public List<ChambreDto> searchChambresByKeyword(Integer number) {
+        return chambreRepository.findChambreByNumero(number).get().stream()
                 .map(chambreMapper::toDto)
                 .collect(Collectors.toList());
-    }
+    }*/
 
 }

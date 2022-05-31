@@ -17,7 +17,7 @@ public class Personne {
     private String prenom;
 
     @Column(name = "datenaissance", nullable = false)
-    private LocalDate datenaissance;
+    private Date datenaissance;
 
     @Column(name = "email", length = 50, unique = true)
     private String email;
@@ -31,9 +31,6 @@ public class Personne {
     @Column(name = "sexe", nullable = false)
     private Character sexe;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "hotel", nullable = false)
-    private Hotel hotel;
 
     @Column(name = "datemodif", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

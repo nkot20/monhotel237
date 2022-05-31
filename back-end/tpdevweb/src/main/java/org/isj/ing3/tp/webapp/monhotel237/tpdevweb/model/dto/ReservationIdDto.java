@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class ReservationIdDto implements Serializable {
-    private Integer client;
-    private Integer chambre;
+    private ClientDto client;
+    private ChambreDto chambre;
     private Date datedebut;
 }

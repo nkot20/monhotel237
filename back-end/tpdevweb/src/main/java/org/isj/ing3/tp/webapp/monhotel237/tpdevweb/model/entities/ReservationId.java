@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -19,10 +17,14 @@ import java.util.Objects;
 @Embeddable
 public class ReservationId implements Serializable {
     private static final long serialVersionUID = -1208939586918046080L;
-    @Column(name = "client", nullable = false)
-    private Integer client;
-    @Column(name = "chambre", nullable = false)
-    private Integer chambre;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "client", nullable = false)
+    private Client client;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "chambre", nullable = false)
+    private Chambre chambre;
     @Column(name = "datedebut", nullable = false)
     private Date datedebut;
 
