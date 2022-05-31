@@ -3,6 +3,7 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EmployeMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EntretienDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Entretien;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EntretienMapper;
@@ -25,13 +26,19 @@ public class EntretienService implements IEntretien {
     private EntretienRepository entretienRepository;
     @Autowired
     private EntretienMapper entretienMapper;
+    @Autowired
+    private EmployeServiceImpl employeService;
+    @Autowired
+    EmployeMapper employeMapper;
 
     @Override
     public EntretienDto addData(EntretienDto entretienDto) throws HotelException {
         //CHeckNull.checkNumero(entretienDto.getNumero());
+        System.out.println(entretienDto.getEmploye().getEmail());
         entretienDto.setNumero(generateUniqueNumber());
         entretienDto.setUser("nkot");
         checkNumberIsAlreadyUsed(entretienDto.getNumero());
+        entretienDto.setEmploye(employeMapper.toDto(employeService.searchByEmail(entretienDto.getEmploye().getEmail())));
         return entretienMapper.toDto(entretienRepository.save(entretienMapper.toEntity(entretienDto)));
     }
 
