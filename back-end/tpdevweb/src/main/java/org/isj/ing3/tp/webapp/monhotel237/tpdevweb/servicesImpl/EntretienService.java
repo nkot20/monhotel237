@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -28,7 +28,9 @@ public class EntretienService implements IEntretien {
 
     @Override
     public EntretienDto addData(EntretienDto entretienDto) throws HotelException {
-        CHeckNull.checkNumero(entretienDto.getNumero());
+        //CHeckNull.checkNumero(entretienDto.getNumero());
+        entretienDto.setNumero(generateUniqueNumber());
+        entretienDto.setUser("nkot");
         checkNumberIsAlreadyUsed(entretienDto.getNumero());
         return entretienMapper.toDto(entretienRepository.save(entretienMapper.toEntity(entretienDto)));
     }
@@ -63,13 +65,24 @@ public class EntretienService implements IEntretien {
     }
 
     @Override
-    public EntretienDto getAll() {
+    public List<EntretienDto> getAll() {
         return null;
     }
     @Override
     public List<EntretienDto> listentretien() {
         return entretienRepository.findAll().stream().map(entretien -> entretienMapper.toDto(entretien))
                 .collect(Collectors.toList());
+    }
+
+    private int generateUniqueNumber() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int random = (new Random()).nextInt(3000);
+        return year + month + day + hour + random;
     }
 
 

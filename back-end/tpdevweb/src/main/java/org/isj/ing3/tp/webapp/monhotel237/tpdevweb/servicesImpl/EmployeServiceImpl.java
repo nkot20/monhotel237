@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -58,8 +60,9 @@ public class EmployeServiceImpl implements IEmploye {
     }
 
     @Override
-    public EmployeDto getAll() {
-        return null;
+    public List<EmployeDto> getAll() {
+        return employeRepository.findAll().stream().map(employe -> employeMapper.toDto(employe))
+                .collect(Collectors.toList());
     }
 
 

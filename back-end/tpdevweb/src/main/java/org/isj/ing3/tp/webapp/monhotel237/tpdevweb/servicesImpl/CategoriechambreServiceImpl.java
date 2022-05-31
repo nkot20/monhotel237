@@ -69,7 +69,7 @@ public class CategoriechambreServiceImpl implements ICategorieChambre {
     }
 
     @Override
-    public CategoriechambreDto getAll() {
+    public List<CategoriechambreDto> getAll() {
         return null;
     }
 

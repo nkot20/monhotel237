@@ -59,7 +59,7 @@ public class RoleService implements IRole {
     }
 
     @Override
-    public RoleDto getAll() {
+    public List<RoleDto> getAll() {
         return null;
     }
 

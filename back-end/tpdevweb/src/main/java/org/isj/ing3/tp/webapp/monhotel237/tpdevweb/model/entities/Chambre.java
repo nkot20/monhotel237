@@ -47,7 +47,7 @@ public class Chambre implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categorie", nullable = false)
-    private Categorie categorie;
+    private Categoriechambre categoriechambre;
 
 
 }

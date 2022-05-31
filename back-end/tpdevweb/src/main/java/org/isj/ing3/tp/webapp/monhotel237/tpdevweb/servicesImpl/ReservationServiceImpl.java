@@ -61,7 +61,7 @@ public class ReservationServiceImpl implements IReservation {
     }
 
     @Override
-    public ReservationDto getAll() {
+    public List<ReservationDto> getAll() {
         return null;
     }
 

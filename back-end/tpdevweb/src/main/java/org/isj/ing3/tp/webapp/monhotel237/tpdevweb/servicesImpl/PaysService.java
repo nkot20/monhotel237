@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -56,7 +57,7 @@ public class PaysService implements IPays {
     }
 
     @Override
-    public PaysDto getAll() {
+    public List<PaysDto> getAll() {
         return null;
     }
 

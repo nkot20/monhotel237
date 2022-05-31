@@ -68,7 +68,7 @@ public class CategorieServiceImpl implements ICategorie {
     }
 
     @Override
-    public CategorieDto getAll() {
+    public List<CategorieDto> getAll() {
         return null;
     }
 

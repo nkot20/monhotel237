@@ -69,7 +69,7 @@ public class ChambreServiceImpl implements IChambre {
     }
 
     @Override
-    public ChambreDto getAll() {
+    public List<ChambreDto> getAll() {
         return null;
     }
 

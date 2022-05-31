@@ -42,9 +42,6 @@ public class Categoriechambre implements Serializable {
     @Column(name = "imge", nullable = false)
     private byte[] imge;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "hotel", nullable = false)
-    private Hotel hotel;
 
 
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -57,7 +58,7 @@ public class HotelService implements IHotel {
     }
 
     @Override
-    public HotelDto getAll() {
+    public List<HotelDto> getAll() {
         return null;
     }
 

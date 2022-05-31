@@ -23,6 +23,7 @@ public class Entretien implements Serializable {
     @Column(name = "identretien", nullable = false)
     private Integer id;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "numero", nullable = false, unique = true)
     private Integer numero;
 
@@ -33,11 +34,18 @@ public class Entretien implements Serializable {
     private Date datefin;
 
     @Column(name = "statut", nullable = false)
-    private Integer statut;
+    private String statut;
+
+    @Column(name = "priorite", nullable = false)
+    private String priorite;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employe", nullable = false)
     private Employe employe;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "chambre", nullable = false)
+    private Chambre chambre;
 
     @Column(name = "datemodif", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
