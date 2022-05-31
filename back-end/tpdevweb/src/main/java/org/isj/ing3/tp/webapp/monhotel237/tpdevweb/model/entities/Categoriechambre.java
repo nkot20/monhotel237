@@ -35,6 +35,10 @@ public class Categoriechambre implements Serializable {
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 
+    @Column(name = "prix", nullable = false, length = 50)
+    private String prix;
+
+
     @Column(name = "imge", nullable = false)
     private byte[] imge;
 
