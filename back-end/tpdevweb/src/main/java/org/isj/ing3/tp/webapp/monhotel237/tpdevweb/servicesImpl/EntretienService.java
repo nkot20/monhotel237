@@ -3,8 +3,9 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.ChambreMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EmployeMapper;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EntretienDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.*;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Entretien;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EntretienMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.*;
@@ -30,16 +31,25 @@ public class EntretienService implements IEntretien {
     private EmployeServiceImpl employeService;
     @Autowired
     EmployeMapper employeMapper;
+    @Autowired
+    ChambreMapper chambreMapper;
+    @Autowired
+    ChambreServiceImpl chambreService;
 
     @Override
     public EntretienDto addData(EntretienDto entretienDto) throws HotelException {
         //CHeckNull.checkNumero(entretienDto.getNumero());
-        System.out.println(entretienDto.getEmploye().getEmail());
         entretienDto.setNumero(generateUniqueNumber());
         entretienDto.setUser("nkot");
         checkNumberIsAlreadyUsed(entretienDto.getNumero());
-        entretienDto.setEmploye(employeMapper.toDto(employeService.searchByEmail(entretienDto.getEmploye().getEmail())));
-        return entretienMapper.toDto(entretienRepository.save(entretienMapper.toEntity(entretienDto)));
+        EmployeDto employeDto = employeMapper.toDto(employeService.searchByEmail(entretienDto.getEmploye().getEmail()));
+        ChambreDto chambreDto = chambreService.searchChambreByNumberDto(entretienDto.getChambre().getNumero());
+        entretienDto.setEmploye(employeDto);
+        entretienDto.setChambre(chambreDto);
+        Entretien entretien = entretienMapper.toEntity(entretienDto);
+        entretien.setEmploye(employeService.searchByEmail(entretienDto.getEmploye().getEmail()));
+        entretien.setChambre(chambreService.searchChambreByNumber(entretienDto.getChambre().getNumero()));
+        return entretienMapper.toDto(entretienRepository.save(entretien));
     }
 
     @Override

@@ -23,7 +23,7 @@ public class EntretienDto implements Serializable {
     private String statut;
     private String priorite;
     private EmployeDto employe;
-    private Chambre chambre;
+    private ChambreDto chambre;
     private Date datemodif;
     private String user;
 }

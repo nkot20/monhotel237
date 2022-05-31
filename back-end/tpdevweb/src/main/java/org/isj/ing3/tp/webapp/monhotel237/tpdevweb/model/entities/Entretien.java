@@ -33,7 +33,7 @@ public class Entretien implements Serializable {
     @Column(name = "datefin", nullable = false)
     private Date datefin;
 
-    @Column(name = "statut", nullable = false)
+    @Column(name = "statut")
     private String statut;
 
     @Column(name = "priorite", nullable = false)

@@ -141,11 +141,11 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
+                                        <tr th:each="entretienDto : ${entretienDtos}">
 
                                             <td></td>
                                             <td>1</td>
-                                            <td>Chambre familiale</td>
+                                            <td th:text="${entretienDto.chambre.numero}">Chambre familiale</td>
                                             <td>Nkot</td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Propre</button>
@@ -164,82 +164,10 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td>1</td>
+                                            <td th:text="${entretienDto.chambre.etage}">1</td>
                                             <td>Occupée</td>
                                         </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>2</td>
-                                            <td>Chambre simple</td>
-                                            <td>Emilie</td>
-                                            <td><button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Propre</button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Propre</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">En nettoyage</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Haute</button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Haute</a></li>
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Basse</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>2</td>
-                                            <td>Réservée</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>3</td>
-                                            <td>Chambre double</td>
-                                            <td>Emilie</td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Propre</button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Propre</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">En nettoyage</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Haute</button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Haute</a></li>
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Basse</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>3</td>
-                                            <td>Libre</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>4</td>
-                                            <td>Loge hospitalière</td>
-                                            <td>Emilie</td>
-                                            <td><button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Propre</button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Propre</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">En nettoyage</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Haute</button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Haute</a></li>
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Basse</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>4</td>
-                                            <td>Occupée</td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>

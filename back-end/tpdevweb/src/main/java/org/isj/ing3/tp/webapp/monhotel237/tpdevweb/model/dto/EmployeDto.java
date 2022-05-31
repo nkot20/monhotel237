@@ -9,19 +9,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class EmployeDto implements Serializable {
 
-    private String nom;
-    private String prenom;
-    private Date datenaissance;
-    private String email;
-    private String tel1;
-    private String tel2;
-    private Character sexe;
-    private HotelDto hotel;
-    private Date datemodif;
-    private String user;
+public class EmployeDto extends PersonneDto implements Serializable {
+
 }
