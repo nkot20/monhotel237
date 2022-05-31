@@ -4,11 +4,14 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.PaysDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.VilleDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Pays;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IPays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/api/pays")
 @RestController
@@ -36,6 +39,10 @@ public class PaysRestController {
         iPays.deletePaysByNomPays(nompays);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/all")
+    public ResponseEntity<List<PaysDto>> getAllPays() {
+        return ResponseEntity.ok(iPays.listPays());
+    }
 
 
     @PutMapping("/updatecountry")
@@ -43,4 +50,6 @@ public class PaysRestController {
         iPays.update(paysDto);
         return ResponseEntity.ok().build();
     }
+
+
 }

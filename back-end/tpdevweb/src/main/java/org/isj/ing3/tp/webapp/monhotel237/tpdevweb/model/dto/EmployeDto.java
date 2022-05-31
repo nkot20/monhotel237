@@ -16,7 +16,7 @@ public class EmployeDto implements Serializable {
 
     private String nom;
     private String prenom;
-    private LocalDate datenaissance;
+    private Date datenaissance;
     private String email;
     private String tel1;
     private String tel2;
