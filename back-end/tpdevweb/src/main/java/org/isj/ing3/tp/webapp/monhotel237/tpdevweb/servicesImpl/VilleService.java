@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -49,6 +50,11 @@ public class VilleService implements IVille {
     }
 
     @Override
+    public List<VilleDto> listVilleDto() {
+        return null;
+    }
+
+    @Override
     public VilleDto update(VilleDto villeDto) throws HotelException {
         Ville entity = searchCityByName(villeDto.getNomville());
         villeMapper.copy(villeDto, entity);
@@ -60,7 +66,7 @@ public class VilleService implements IVille {
     }
 
     @Override
-    public VilleDto getAll() {
+    public List<VilleDto> getAll() {
         return null;
     }
 
