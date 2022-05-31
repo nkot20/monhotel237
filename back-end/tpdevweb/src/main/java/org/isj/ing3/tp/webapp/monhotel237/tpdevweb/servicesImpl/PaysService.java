@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -63,6 +65,12 @@ public class PaysService implements IPays {
 
     private void checkNomPaysIsAlreadyUsed(String nomPays) throws HotelException {
         if (paysRepository.findByNompays(nomPays).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
+    }
+
+    @Override
+    public List<PaysDto> listPays() {
+        return paysRepository.findAll().stream().map(pays -> paysMapper.toDto(pays))
+                .collect(Collectors.toList());
     }
 
 

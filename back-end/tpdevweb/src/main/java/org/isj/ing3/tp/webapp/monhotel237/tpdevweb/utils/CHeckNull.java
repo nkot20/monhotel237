@@ -43,4 +43,15 @@ public class CHeckNull {
         }
     }
 
+    public static void checkNomClient(String nomClient) throws HotelException {
+        if ( (Objects.isNull(nomClient)))
+        {throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_REQUIRED);
+        }
+    }
+
+    public static void checkNomEmploye(String nomEmploye) throws HotelException {
+        if ( (Objects.isNull(nomEmploye)))
+        {throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_REQUIRED);
+        }
+    }
 }

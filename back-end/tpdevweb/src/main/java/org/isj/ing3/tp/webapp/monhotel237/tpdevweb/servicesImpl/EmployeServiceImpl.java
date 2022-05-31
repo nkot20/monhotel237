@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -44,13 +43,19 @@ public class EmployeServiceImpl implements IEmploye {
         CHeckNull.checkEmail(email);
         return employeRepository.findEmployeByEmail(email).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
     }
-
+    @Override
+    public Employe searchByName(String nom) throws HotelException {
+        CHeckNull.checkNomEmploye(nom);
+        return employeRepository.findEmployeByNom(nom)
+                .orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
+    }
 
     @Override
     public void deleteByEmail(String email) throws HotelException {
         Employe employe = searchByEmail(email);
         employeRepository.deleteById(employe.getId());
     }
+
 
     @Override
     public EmployeDto update(EmployeDto employeDto) throws HotelException {
@@ -65,7 +70,11 @@ public class EmployeServiceImpl implements IEmploye {
                 .collect(Collectors.toList());
     }
 
-
+    @Override
+    public List<EmployeDto> listEmployes() {
+        return employeRepository.findAll().stream().map(employe -> employeMapper.toDto(employe))
+                .collect(Collectors.toList());
+    }
 
     private void checkEmailIsAlreadyUsed(String email) throws HotelException {
         if (employeRepository.findEmployeByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);

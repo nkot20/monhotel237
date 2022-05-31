@@ -3,7 +3,10 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.api;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ChambreDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ClientDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EmployeDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.VilleDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Employe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IEmploye;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.EmployeServiceImpl;
@@ -12,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api/employe")
@@ -34,6 +38,11 @@ public class EmployeRestController {
         Employe employe = employeService.searchByEmail(email);
         return ResponseEntity.ok(employe);
     }
+    @GetMapping("/findemploye/{nom}")
+    public ResponseEntity<Employe> findByNom(@PathVariable("nom") String nom) throws HotelException {
+        Employe employe = employeService.searchByName(nom);
+        return ResponseEntity.ok(employe);
+    }
 
     @DeleteMapping("/deleteemploye/{id}")
     public ResponseEntity<Void> delete(@PathVariable("email") String email) throws HotelException {
@@ -46,4 +55,10 @@ public class EmployeRestController {
         employeService.update(employeDto);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<EmployeDto>> getAllEmploye() {
+        return ResponseEntity.ok(employeService.listEmployes());
+    }
+
 }

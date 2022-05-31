@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -70,5 +72,17 @@ public class ClientServiceImpl implements IClient {
 
     private void checkEmailIsAlreadyUsed(String email) throws HotelException {
         if (clientRepository.findClientByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
+    }
+
+    @Override
+    public List<ClientDto> listClients() {
+        return clientRepository.findAll().stream().map(client -> clientMapper.toDto(client))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Client searchByName(String nom) throws HotelException {
+        CHeckNull.checkNomClient(nom);
+        return clientRepository.findClientByNom(nom).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
     }
 }
