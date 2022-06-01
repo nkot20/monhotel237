@@ -60,22 +60,16 @@ public class HotelService implements IHotel {
     }
 
     @Override
-    public List<HotelDto> getAll() {
+    public List<HotelDto> getAll()  {
 
-            return hotelRepository.findAll().stream().map(hotel -> hotelMapper.toDto(hotel))
-                    .collect(Collectors.toList());
+            return null;
 
     }
 
     private void checkEmailIsAlreadyUsed(String email) throws HotelException {
         if (hotelRepository.findHotelByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
     }
-    @Override
-    public List<HotelDto> searchhotelByKeyword(String keyword) {
 
-        // return acteRepository.findActeByNumeroOrNom(keyword,keyword).get().stream().map(acte -> acteMapper.toDto(acte)).collect(Collectors.toList());
-        return hotelRepository.findActeByNumeroOrNom(keyword,keyword).get().stream().map(hotelMapper::toDto).collect(Collectors.toList());
-    }
 
 
 

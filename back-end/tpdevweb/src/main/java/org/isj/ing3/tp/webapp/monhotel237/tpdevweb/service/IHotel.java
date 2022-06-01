@@ -10,5 +10,5 @@ public interface IHotel extends IEntity<HotelDto>{
     public Hotel searchByEmail(String email) throws HotelException;
 
     public void deleteByEmail(String email) throws HotelException;
-    List<HotelDto> searchhotelByKeyword(String keyword);
+
 }

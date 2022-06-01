@@ -13,7 +13,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
     Optional<Hotel> findHotelByEmail(String email);
 
 
-    Optional<List<Hotel>>findActeByNumeroOrNom(String motcle1, String motcle2);
 
-    boolean existsByNumeroIgnoreCase(String numero);
+
+
 }

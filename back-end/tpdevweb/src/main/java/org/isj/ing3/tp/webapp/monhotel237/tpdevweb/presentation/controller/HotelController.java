@@ -48,15 +48,8 @@ public class HotelController {
         return "redirect:/listhotel";
     }
 
-    @GetMapping("/listhotel")
-    public String pageListHotel(Model model) {
 
-        List<HotelDto> hotelDtos = iHotel.getAll();
 
-        model.addAttribute("hotelDto", hotelDtos);
-
-        return "liste";
-    }
     @GetMapping("/enregistrerhotelform")
     public String pageEnregistrerActeForm(Model model) {
 
