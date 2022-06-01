@@ -28,10 +28,10 @@ public class Entretien implements Serializable {
     private Integer numero;
 
     @Column(name = "datedebut", nullable = false)
-    private Date datedebut;
+    private String datedebut;
 
     @Column(name = "datefin", nullable = false)
-    private Date datefin;
+    private String datefin;
 
     @Column(name = "statut")
     private String statut;

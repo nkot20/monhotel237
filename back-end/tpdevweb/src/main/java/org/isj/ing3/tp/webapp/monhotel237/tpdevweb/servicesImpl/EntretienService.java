@@ -6,6 +6,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.ChambreMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EmployeMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.*;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Employe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Entretien;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EntretienMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.*;
@@ -41,11 +42,15 @@ public class EntretienService implements IEntretien {
         //CHeckNull.checkNumero(entretienDto.getNumero());
         entretienDto.setNumero(generateUniqueNumber());
         entretienDto.setUser("nkot");
+
         checkNumberIsAlreadyUsed(entretienDto.getNumero());
+
         EmployeDto employeDto = employeMapper.toDto(employeService.searchByEmail(entretienDto.getEmploye().getEmail()));
         ChambreDto chambreDto = chambreService.searchChambreByNumberDto(entretienDto.getChambre().getNumero());
+
         entretienDto.setEmploye(employeDto);
         entretienDto.setChambre(chambreDto);
+
         Entretien entretien = entretienMapper.toEntity(entretienDto);
         entretien.setEmploye(employeService.searchByEmail(entretienDto.getEmploye().getEmail()));
         entretien.setChambre(chambreService.searchChambreByNumber(entretienDto.getChambre().getNumero()));
@@ -73,7 +78,9 @@ public class EntretienService implements IEntretien {
     @Override
     public EntretienDto update(EntretienDto entretienDto) throws HotelException {
         Entretien entity = searchEntretienByNumero(entretienDto.getNumero());
+        Employe employe =  employeService.searchByEmail(entretienDto.getEmploye().getEmail());
         entretienMapper.copy(entretienDto, entity);
+        entity.setEmploye(employe);
         return entretienMapper.toDto(entretienRepository.save(entity));
     }
 
@@ -91,6 +98,12 @@ public class EntretienService implements IEntretien {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public EntretienDto searchEntretienByNumeroDto(Integer numero) throws HotelException {
+        CHeckNull.checkNumero(numero);
+        return entretienMapper.toDto(entretienRepository.findEntretienByNumero(numero).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
     private int generateUniqueNumber() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -98,7 +111,7 @@ public class EntretienService implements IEntretien {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int random = (new Random()).nextInt(3000);
+        int random = (new Random()).nextInt(10000);
         return year + month + day + hour + random;
     }
 

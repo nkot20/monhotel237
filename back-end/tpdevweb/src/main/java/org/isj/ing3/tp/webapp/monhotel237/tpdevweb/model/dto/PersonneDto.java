@@ -12,7 +12,7 @@ import java.util.Date;
 public class PersonneDto {
     private String nom;
     private String prenom;
-    private Date datenaissance;
+    private String datenaissance;
     private String email;
     private String tel1;
     private String tel2;

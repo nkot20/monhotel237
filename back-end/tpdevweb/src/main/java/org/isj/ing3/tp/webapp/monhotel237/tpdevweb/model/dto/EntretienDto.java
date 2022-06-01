@@ -16,10 +16,10 @@ import java.util.Date;
 @Data
 public class EntretienDto implements Serializable {
     private Integer numero;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date datedebut;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date datefin;
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
+    private String datedebut;
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
+    private String datefin;
     private String statut;
     private String priorite;
     private EmployeDto employe;
