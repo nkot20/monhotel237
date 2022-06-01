@@ -13,4 +13,6 @@ public interface IEntretien extends IEntity<EntretienDto>{
     public void deleteByNumber(Integer number) throws HotelException;
     public List<EntretienDto> listentretien();
 
+    EntretienDto searchEntretienByNumeroDto(Integer numero) throws HotelException;
+
 }

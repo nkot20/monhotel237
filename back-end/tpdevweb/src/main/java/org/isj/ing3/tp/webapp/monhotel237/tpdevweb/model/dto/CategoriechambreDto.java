@@ -16,5 +16,4 @@ public class CategoriechambreDto implements Serializable {
     private Date datemodif;
     private String username;
     private byte[] imge;
-    private HotelDto hotel;
 }

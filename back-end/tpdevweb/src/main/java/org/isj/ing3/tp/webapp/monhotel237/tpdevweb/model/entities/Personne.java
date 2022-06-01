@@ -17,7 +17,7 @@ public class Personne {
     private String prenom;
 
     @Column(name = "datenaissance", nullable = false)
-    private Date datenaissance;
+    private String datenaissance;
 
     @Column(name = "email", length = 50, unique = true)
     private String email;

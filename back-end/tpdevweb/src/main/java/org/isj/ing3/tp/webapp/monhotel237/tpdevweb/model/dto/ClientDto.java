@@ -16,7 +16,7 @@ public class ClientDto implements Serializable {
 
     private String nom;
     private String prenom;
-    private Date datenaissance;
+    private String datenaissance;
     private String email;
     private String tel1;
     private String tel2;

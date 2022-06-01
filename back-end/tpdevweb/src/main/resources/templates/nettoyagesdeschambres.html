@@ -93,9 +93,9 @@
                                                         <label for="largeSelect" class="form-label">Priorité</label>
                                                         <select id="largeSelect2" th:field="*{priorite}" class="form-select form-select-lg">
 
-                                                            <option value="1">Haute</option>
-                                                            <option value="2">Basse</option>
-                                                            <option value="3">Moyenne</option>
+                                                            <option value="Haute">Haute</option>
+                                                            <option value="Basse">Basse</option>
+                                                            <option value="Moyenne">Moyenne</option>
                                                         </select>
                                                     </div>
                                                     <div class="mt-2 mb-3">
@@ -130,42 +130,114 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th></th>
                                             <th>Chambre</th>
                                             <th>Type de chambre</th>
                                             <th>Responsable</th>
-                                            <th>Statut de l'entretien</th>
+                                            <th>Date de début</th>
+                                            <th>Date de fin</th>
+                                            <th>Statut du nettoyage</th>
                                             <th>Priorité</th>
                                             <th>Étage</th>
-                                            <th>Statut néttoyage</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr th:each="entretienDto : ${entretienDtos}">
+                                        <tr th:each="entretienDto, state : ${entretienDtos}">
 
-                                            <td></td>
-                                            <td>1</td>
+                                            <td th:text="${state.count}">1</td>
                                             <td th:text="${entretienDto.chambre.numero}">Chambre familiale</td>
-                                            <td>Nkot</td>
-                                            <td>
-                                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Propre</button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Propre</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">En nettoyage</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);">Sale</a></li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Haute</button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Haute</a></li>
-                                                        <li><a class="dropdown-item" href="javascript:void(0);">Basse</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                            <td th:text="${entretienDto.employe.nom}">Nkot</td>
+                                            <td th:text="${entretienDto.datedebut}"></td>
+                                            <td th:text="${entretienDto.datefin}"></td>
+                                            <td th:text="${entretienDto.statut}">St</td>
+                                            <td th:text="${entretienDto.priorite}"></td>
                                             <td th:text="${entretienDto.chambre.etage}">1</td>
-                                            <td>Occupée</td>
+                                            <td>
+                                                <a th:href="@{'/modifiernettoyageform/?numero=' + ${entretienDto.numero}}"><button type="button" class="btn btn-primary" ><i class="bx bx-edit-alt me-1"></i>Modifier</button></a>
+                                                <a><button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#smallModal' + ${state.count}"><i class="bx bx-trash me-1"></i>Supprimer</button></a>
+                                                <!-- Modal pour supprimer -->
+                                                <div class="modal fade" th:id="'smallModal' + ${state.count}" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel2">Supression</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col mb-3">
+                                                                        <label  class="form-label">Voulez vous vraiment supprimer ?</label>
+                                                                        </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                                    Fermer
+                                                                </button>
+                                                                <a th:href="@{'/supprimernettoyage/?numero=' + ${entretienDto.numero}}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal pour modifier -->
+                                                <!--<div class="modal fade" th:id="'updateModal' + ${state.count}" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                        <div class="modal-content">
+                                                            <form th:method="post"
+                                                                  th:action="@{/modifiernettoyage}"
+                                                                  th:object="${entretienDtoUpdate}">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" th:id="'updateModalTitle' + ${state.count}">Modifier</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <div class="mt-2 mb-3">
+                                                                        <label th:for="'largeSelect' + ${state.count}" class="form-label">Chambre</label>
+                                                                        <select th:id="'largeSelect' + ${state.count}" th:field="*{chambre.numero}" class="form-select form-select-lg">
+
+                                                                            <option th:each="chambreDto : ${chambreDtos}" th:value="${chambreDto.numero}" th:text="${chambreDto.numero}">101</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mt-2 mb-3">
+                                                                        <label th:for="'largeSelectPrio' + ${state.count}" class="form-label">Priorité</label>
+                                                                        <select th:id="'largeSelectPrio' + ${state.count}" th:field="*{priorite}" class="form-select form-select-lg">
+
+                                                                            <option value="1">Haute</option>
+                                                                            <option value="2">Basse</option>
+                                                                            <option value="3">Moyenne</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mt-2 mb-3">
+                                                                        <label th:for="'largeSelectRes' + ${state.count}" class="form-label">Responsable</label>
+                                                                        <select th:id="'largeSelectRes' + ${state.count}" th:field="*{employe.email}" class="form-select form-select-lg">
+                                                                            <option th:each="employeDto : ${employeDtos}" th:value="${employeDto.email}" th:text="${employeDto.nom}">101</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="mt-2 mb-3">
+                                                                        <label th:for="'largeInputDa' + ${state.count}" class="form-label">Date de debut</label>
+                                                                        <input type="date"  class="form-control" name="datedebut" th:value="${entretienDto.datedebut}">
+                                                                    </div>
+                                                                    <div class="mt-2 mb-3">
+                                                                        <label th:for="'largeInputDatefin' + ${state.count}" class="form-label">Date de fin</label>
+                                                                        <input type="date" class="form-control" name="datefin" th:value="${entretienDto.datefin}">
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                                        Fermer
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                                            </td>
                                         </tr>
 
                                     </tbody>
