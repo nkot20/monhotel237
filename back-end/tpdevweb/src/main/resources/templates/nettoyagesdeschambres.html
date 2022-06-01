@@ -43,18 +43,20 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="row">
-                                    <div class="col-md-3"> <span>Date de début</span> </div>
-                                    <div class="col-md-3 text-start"> <span>Date de fin</span> </div>
+                                    <div class="col-md-3"> <span>Numéro de la chambre</span> </div>
+                                    <div class="col-md-3 text-start">  </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-9">
-                                <form action="" method="post">
+                                <form action="" th:action="recherchernettoyage" method="post">
                                     <div class="row">
-                                        <div class="col-md-3"> <input type="date" name="datedebutsearch" class="form-control"> </div>
-                                        <div class="col-md-3"> <input type="date" name="datefinsearch" class="form-control"> </div>
+                                        <div class="col-md-3"> <input type="number" name="numerochambre" class="form-control"> </div>
+
                                         <div class="col-md-3 "><button type="submit" class="btn btn-secondary">Rechercher</button></div>
+                                        <div class="col-md-3"> </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -130,6 +132,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Chambre</th>
                                             <th>Type de chambre</th>
                                             <th>Responsable</th>
@@ -137,7 +140,7 @@
                                             <th>Date de fin</th>
                                             <th>Statut du nettoyage</th>
                                             <th>Priorité</th>
-                                            <th>Étage</th>
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -146,12 +149,13 @@
 
                                             <td th:text="${state.count}">1</td>
                                             <td th:text="${entretienDto.chambre.numero}">Chambre familiale</td>
+                                            <td th:text="${entretienDto.chambre.categoriechambre.libelle}">Chambre familiale</td>
                                             <td th:text="${entretienDto.employe.nom}">Nkot</td>
                                             <td th:text="${entretienDto.datedebut}"></td>
                                             <td th:text="${entretienDto.datefin}"></td>
                                             <td th:text="${entretienDto.statut}">St</td>
                                             <td th:text="${entretienDto.priorite}"></td>
-                                            <td th:text="${entretienDto.chambre.etage}">1</td>
+<!--                                            <td th:text="${entretienDto.chambre.etage}">1</td>-->
                                             <td>
                                                 <a th:href="@{'/modifiernettoyageform/?numero=' + ${entretienDto.numero}}"><button type="button" class="btn btn-primary" ><i class="bx bx-edit-alt me-1"></i>Modifier</button></a>
                                                 <a><button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#smallModal' + ${state.count}"><i class="bx bx-trash me-1"></i>Supprimer</button></a>
@@ -243,7 +247,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row  mt-4">
+                            <div class="row text-center" th:if="${error != ''}">
+                                <h4 class="fw-bold py-3 mb-4" th:text = "${error}">Nettoyage des chambres</h4>
+                            </div>
+                            <div class="row  mt-4" th:if="${error == ''}">
                                 <nav aria-label="Page navigation" class="">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item first">

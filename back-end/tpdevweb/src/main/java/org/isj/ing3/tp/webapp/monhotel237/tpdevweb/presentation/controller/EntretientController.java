@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,8 +37,8 @@ public class EntretientController {
         model.addAttribute("chambreDtos", chambreDtos);
         model.addAttribute("entretienDtos", entretienDtos);
         model.addAttribute("entretienDto", entretienDto);
-        model.addAttribute("entretienDtoUpdate", new EntretienDto());
-
+        model.addAttribute("keyword", "");
+        model.addAttribute("error", "");
         return "nettoyagesdeschambres";
     }
 
@@ -74,5 +75,29 @@ public class EntretientController {
         iEntretien.update(entretienDto);
 
         return "redirect:/entretien";
+    }
+
+    @PostMapping("/recherchernettoyage")
+    public String rechercherNettoyage(@RequestParam(value = "numerochambre") Integer numerochambre, Model model) throws HotelException {
+
+        List<EmployeDto> employeDtos = iEmploye.getAll();
+        List<ChambreDto> chambreDtos = iChambre.listChambres();
+        EntretienDto entretienDto = new EntretienDto();
+
+        model.addAttribute("employeDtos", employeDtos);
+        model.addAttribute("chambreDtos", chambreDtos);
+        model.addAttribute("keyword", "");
+        try {
+            List<EntretienDto> entretienDtos = iEntretien.searchEntretienByRoom(numerochambre);
+            model.addAttribute("entretienDtos", entretienDtos);
+            model.addAttribute("error", "");
+        } catch (HotelException e) {
+            System.out.println(e.getMessage());
+            model.addAttribute("entretienDtos", new ArrayList<EntretienDto>());
+            model.addAttribute("error", "Aucun nettoyage ne correspond");
+        }
+
+        model.addAttribute("entretienDto", new EntretienDto());
+        return "nettoyagesdeschambres";
     }
 }

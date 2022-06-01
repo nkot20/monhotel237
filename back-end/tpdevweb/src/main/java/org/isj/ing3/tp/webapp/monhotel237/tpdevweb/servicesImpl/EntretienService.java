@@ -6,6 +6,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.ChambreMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EmployeMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.*;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Chambre;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Employe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Entretien;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.EntretienMapper;
@@ -84,9 +85,6 @@ public class EntretienService implements IEntretien {
         return entretienMapper.toDto(entretienRepository.save(entity));
     }
 
-    private void checkNumberIsAlreadyUsed(Integer number) throws HotelException {
-        if (entretienRepository.findEntretienByNumero(number).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
-    }
 
     @Override
     public List<EntretienDto> getAll() {
@@ -104,6 +102,19 @@ public class EntretienService implements IEntretien {
         return entretienMapper.toDto(entretienRepository.findEntretienByNumero(numero).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
     }
 
+    @Override
+    public List<EntretienDto> searchEntretienByRoom(Integer numero) throws HotelException {
+        Chambre chambre = chambreService.searchChambreByNumber(numero);
+        return getEntretienDtos(entretienRepository.findEntretienByChambre(chambre)
+                .orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    private List<EntretienDto> getEntretienDtos(List<Entretien> entretiens) {
+
+        return entretiens.stream().map(entretienMapper::toDto).collect(Collectors.toList());
+
+    }
+
     private int generateUniqueNumber() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -113,6 +124,10 @@ public class EntretienService implements IEntretien {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int random = (new Random()).nextInt(10000);
         return year + month + day + hour + random;
+    }
+
+    private void checkNumberIsAlreadyUsed(Integer number) throws HotelException {
+        if (entretienRepository.findEntretienByNumero(number).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
     }
 
 

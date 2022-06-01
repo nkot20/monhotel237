@@ -17,4 +17,5 @@ public class ReservationDto implements Serializable {
     private Integer nbenfant;
     private Date datefin;
     private Integer quantite;
+    private String type;
 }

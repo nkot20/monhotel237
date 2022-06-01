@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+
+            <th:block th:replace="fragments/_menu.html::menu"></th:block>
+            <!-- / Menu -->
+            <div class="layout-page">
+                <div id="titre" class="bk-color titre">
+                    <h1>Ajouter une réservation</h1>
+                </div>
+                <ul class=" bk-color nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="li w-li nav-item">
+                        <a class="nav-link active" href="#">Réservation de la chambre</a>
+                    </li>
+                    <li class="li w-li nav-item">
+                        <a class="nav-link" href="#">Ajouter les informations</a>
+                    </li>
+                    <li class="li w-li nav-item">
+                        <a class="nav-link" href="#"> Confirmer</a>
+                    </li>
+                </ul>
+                <div class="bk-color">
+                    <div class="end-pos  select-zone-sb space-u row">
+                        <div class="row">
+
+                            <div class="reduce_width ms-n4">
+                                <div>
+                                    <label for="guest" class="form-label">Type de réservation</label>
+                                </div>
+                                <div>
+                                    <select id="guest" class="dim-select">
+                                        <option value="1">Groupée</option>
+                                        <option value="2">Non groupée</option>
+                                     
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="reduce_width ms-n4">
+                                <div class="dn-div">
+                                    <label for="adult" class="form-label">Adultes</label>
+                                    <select id="adult" class="select2 dn-s">
+                                    <option value="0">1</option>
+                                    <option value="1">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="5">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="reduce_width" style="margin-left: -6.6rem !important;">
+                                <div class="dn-div">
+                                    <label for="children" class="form-label">Enfant</label>
+                                    <select id="children" class="select2 dn-s">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5 ms-5">
+                            <label for="" class="sl">30</label>
+                            <span class="sp">Chambre disponibles</span>
+                        </div>
+                        <div class="row">
+                            <div class="reduce_width">
+                                <label for="DateStay" class="form-label">Date de Début</label>
+                                <input type="date" class=" form-control" id="date" name="date" placeholder="08/03/2022-08/04/2022" maxlength="6">
+                            </div>
+                            <div class="reduce_width">
+                                <label for="DateStay" class="form-label">Date de fin</label>
+                                <input type="date" class=" form-control" id="date" name="date" placeholder="08/03/2022-08/04/2022" maxlength="6">
+                            </div>
+                            <!--  <div class="dn-div">
+                                <label for="adult" class="form-label">Adultes</label>
+                                <select id="adult" class="select2 dn-s">
+                                    <option value="0">1</option>
+                                    <option value="1">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="5">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div class="dn-div">
+                                <label for="children" class="form-label">Enfant</label>
+                                <select id="children" class="select2 dn-s">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div> -->
+                            <div class="btn-searchR">
+                                <button type="submit" class="btn btn-primary me-2">Rechercher des chambres</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="end-pos1 space-u select-zone-sb row">
+
+                    <div class="select-zone  mb-3 col-md-4-new">
+                        <label for="guest" class="form-label">Politique d'annulation</label>
+                        <select id="guest" class="dim-select1">
+                            <option value="1">Annulation à une certaine date</option>
+                            <option value="2">La pénalité d'une nuit</option>
+                            <option value="3">Réservation d'hôtel prépayée et non remboursable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-n5">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" style="margin-top: -6rem !important;">
+                        <div>
+                            <div class="dispo-grid">
+                                <label for="RoomType" class="sp-q form-label">Catégorie de chambres</label>
+
+                                <label for="TourismTax" class="form-label">Taxes touristiques</label>
+                                <label for="Quantity" class="form-label">Quantité</label>
+                                <label for="" class="inv form-label">Quantity</label>
+                            </div>
+                            <div class="row bk-color dispo-grid1">
+                                <div class=" sp-q">
+                                    <label for="Quantity" class="form-label colorlable">Chambre double VIP<br>2 pièces</label>
+
+                                </div>
+                                <label for="p3" class="form-label">Fcfa 3.00</label>
+                                <select id="guest" class="dim-select">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <!--  <div class="text-end ms-5">
+                                    <button type="submit" class="addbtn btn btn-primary me-2 ">Ajouter</button>
+                                </div> -->
+                            </div>
+                            <div class="row bk-color dispo-grid1 mt-3">
+                                <div class=" sp-q">
+                                    <label for="Quantity" class="form-label colorlable">Chambre double VIP<br>2 pièces</label>
+
+                                </div>
+                                <label for="p3" class="form-label">Fcfa 3.00</label>
+                                <select id="guest" class="dim-select">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <!--  <div class="text-end ms-5">
+                                    <button type="submit" class="addbtn btn btn-primary me-2 ">Ajouter</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="disp decalage">
+
+                    <div class="sp">
+                        <a href="room-book-info.html"><button type="submit" class="btn btn-primary me-2">Continuer</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>
