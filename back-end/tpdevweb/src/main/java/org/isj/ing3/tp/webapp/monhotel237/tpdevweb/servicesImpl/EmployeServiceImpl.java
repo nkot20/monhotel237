@@ -39,23 +39,50 @@ public class EmployeServiceImpl implements IEmploye {
     }
 
     @Override
+    public EmployeDto searchByNomDto(String nom) throws HotelException{
+        CHeckNull.checkNomEmploye(nom);
+        return employeMapper.toDto(employeRepository.findEmployeByNom(nom)
+                .orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public int saveEmploye(EmployeDto employeDto) {
+        employeDto.setUser("nkot");
+        if ( employeRepository.findEmployeByNom(employeDto.getNom()).isPresent() ) return 0;
+        return employeRepository.save(employeMapper.toEntity(employeDto)).getId();
+    }
+
+    @Override
     public Employe searchByEmail(String email) throws HotelException {
         CHeckNull.checkEmail(email);
         return employeRepository.findEmployeByEmail(email).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
     }
     @Override
-    public Employe searchByName(String nom) throws HotelException {
+    public Employe searchByNom(String nom) throws HotelException {
         CHeckNull.checkNomEmploye(nom);
         return employeRepository.findEmployeByNom(nom)
                 .orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
     }
 
     @Override
-    public void deleteByEmail(String email) throws HotelException {
-        Employe employe = searchByEmail(email);
-        employeRepository.deleteById(employe.getId());
+    public EmployeDto updateEmployeDto(EmployeDto employeDto) throws HotelException {
+        Employe employe  = searchByNom(employeDto.getNom());
+        employeMapper.copy(employeDto, employe);
+        return employeMapper.toDto(employeRepository.save(employe));
     }
 
+    @Override
+    public int deleteByEmail(String email) throws HotelException {
+        Employe employe = searchByEmail(email);
+        employeRepository.deleteById(employe.getId());
+        return 1;
+    }
+
+    @Override
+    public int deleteByNom(String nom) throws HotelException {
+        employeRepository.deleteById(employeRepository.findEmployeByNom(nom).get().getId());
+        return 1;
+    }
 
     @Override
     public EmployeDto update(EmployeDto employeDto) throws HotelException {

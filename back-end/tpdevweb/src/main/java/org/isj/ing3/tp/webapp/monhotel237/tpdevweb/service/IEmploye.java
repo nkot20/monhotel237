@@ -8,14 +8,19 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Utilisateurhot
 import java.util.List;
 
 public interface IEmploye extends IEntity<EmployeDto>{
+
+    int saveEmploye(EmployeDto employeDto) throws HotelException;
     public Employe searchByEmail(String email) throws HotelException;
 
-    //Employe searchEmploye(List<Employe> employes);
+    public EmployeDto searchByNomDto(String nom) throws HotelException;
 
-    public Employe searchByName(String nom) throws HotelException;
+    public Employe searchByNom(String nom) throws HotelException;
 
+    EmployeDto updateEmployeDto(EmployeDto employeDto) throws HotelException;
 
-    public void deleteByEmail(String email) throws HotelException;
+    public int deleteByEmail(String email) throws HotelException;
+
+    public int deleteByNom(String nom) throws HotelException;
 
     List<EmployeDto> listEmployes();
 

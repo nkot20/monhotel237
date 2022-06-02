@@ -12,6 +12,7 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IEmploye;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl.EmployeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class EmployeRestController {
     @Autowired
     private IEmploye employeService;
 
-    @PostMapping("/saveemploye")
+    @PostMapping(value = "/saveemploye")
     public ResponseEntity<Void> save(@RequestBody EmployeDto employeDto) throws HotelException {
         employeService.addData(employeDto);
         return ResponseEntity.ok().build();
@@ -40,7 +41,7 @@ public class EmployeRestController {
     }
     @GetMapping("/findemploye/{nom}")
     public ResponseEntity<Employe> findByNom(@PathVariable("nom") String nom) throws HotelException {
-        Employe employe = employeService.searchByName(nom);
+        Employe employe = employeService.searchByNom(nom);
         return ResponseEntity.ok(employe);
     }
 
@@ -56,9 +57,8 @@ public class EmployeRestController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<EmployeDto>> getAllEmploye() {
-        return ResponseEntity.ok(employeService.listEmployes());
-    }
+
+   /* private void getAuthentificationContext(Model model) {
+    }*/
 
 }
