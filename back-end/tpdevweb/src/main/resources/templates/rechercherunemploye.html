@@ -30,29 +30,21 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Employés/</span>Liste des employés</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Employés/</span> Rechercher un Employé</h4>
 
                         <div class="row">
-                            <!--<div class="col-sm-1 col-md-2">
-
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-search"></i></span>
-                                    <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="" aria-label="Doe" aria-describedby="basic-icon-default-fullname2" />
-                                </div>
-
-                            </div>
-                            <div class="col-md-2 col-sm-2 ">
-                                <form action="" th:action="recherchernettoyage" method="post">
+                            <div class="col-md-9">
+                                <form th:action="rechercheremploye" method="post">
                                     <div class="row">
-                                        <div class="col-md-3"> <input type="text" name="nom" class="form-control"> </div>
-                                        <div class="col-md-3 "><button type="submit" class="btn btn-primary">Rechercher</button></div>
-                                        <div class="col-md-3"> </div>
-
+                                            <div class="col-md-3"><input class="form-control" type="text" name="keyword"></div>
+                                            <div class="col-md-3"><input class="btn btn-primary" type="submit" value="Rechercher"></div>
                                     </div>
                                 </form>
-                            </div>-->
+                            </div>
                         </div>
+
                         <!-- Basic Bootstrap Table -->
+                    <div class="row">
                         <div  class="card mt-3">
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
@@ -181,8 +173,10 @@
                   </table>
                 </div>
               </div>
+                    </div>
               
             </div>
+                </div>
             <!-- / Content -->
 
             <!-- Footer -->

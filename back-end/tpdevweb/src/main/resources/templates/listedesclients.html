@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+
+    <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+
+            <th:block th:replace="fragments/_menu.html::menu"></th:block>
+
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                <th:block th:replace="fragments/_nav.html::nav"></th:block>
+
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Clients/</span> Liste des clients</h4>
+
+                        <div class="row">
+                            <div class="col-sm-1 col-md-2">
+
+                            </div>
+                            <div class="col-md-2 col-sm-2 ">
+
+                            </div>
+                        </div>
+                        <!-- Basic Bootstrap Table -->
+                        <div class="card">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Email</th>
+                                        <th>Téléphone</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                    <tr th:each="clientDto : ${clientDtos}">
+                                        <td th:text="${clientDto.nom}"><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Mr. FOUOMENE</strong></td>
+                                        <td th:text="${clientDto.prenom}">René Daniel</td>
+                                        <td>
+                                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                                <li
+                                                        data-bs-toggle="tooltip"
+                                                        data-popup="tooltip-custom"
+                                                        data-bs-placement="top"
+                                                        class="avatar avatar-xs pull-up"
+                                                        title="Lilian Fuller">
+                                                    <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+                                                </li>
+                                                <li
+                                                        data-bs-toggle="tooltip"
+                                                        data-popup="tooltip-custom"
+                                                        data-bs-placement="top"
+                                                        class="avatar avatar-xs pull-up"
+                                                        title="Sophia Wilkerson">
+                                                    <img src="../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+                                                </li>
+                                                <li
+                                                        data-bs-toggle="tooltip"
+                                                        data-popup="tooltip-custom"
+                                                        data-bs-placement="top"
+                                                        class="avatar avatar-xs pull-up"
+                                                        title="Christina Parker">
+                                                    <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td th:text="${clientDto.email}"><span class="badge bg-label-primary me-1">fouomenedaniel@info.com</span></td>
+                                        <td th:text="${clientDto.tel1}">677052314</td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+                    <th:block th:replace="fragments/_footer.html::footer"></th:block>
+
+                    <!-- / Footer -->
+
+                                                <div class="content-backdrop fade"></div>
+                            </div>
+                            <!-- Content wrapper -->
+                        </div>
+                        <!-- / Layout page -->
+                    </div>
+
+                    <!-- Overlay -->
+                    <div class="layout-overlay layout-menu-toggle"></div>
+                </div>
+                <!-- / Layout wrapper -->
+
+                <!-- Core JS -->
+                <!-- build:js assets/vendor/js/core.js -->
+    <th:block th:replace="fragments/_js.html::js"></th:block>
+
+</body>
+
+</html>

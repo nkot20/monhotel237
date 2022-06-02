@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <!-- Menu -->
+
+        <th:block th:replace="fragments/_menu.html::menu"></th:block>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+
+            <th:block th:replace="fragments/_nav.html::nav"></th:block>
+            <!-- / Navbar -->
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><a><span class="text-muted fw-light">Employes /</span></a>Modifications d'un employe</h4>
+
+                    <!-- Basic Bootstrap Table -->
+                    <div class="col-xl">
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Modifier les Informations d'Un Employe</h5>
+                                <small class="text-muted float-end">modifications</small>
+                            </div>
+                            <div class="card-body">
+                                <form
+                                        th:method="post"
+                                        th:action="@{/editeremploye}"
+                                        th:object="${employeDto}">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fullname">Nom</label>
+                                        <div class="input-group input-group-merge">
+                                             <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                            <input
+                                                    th:field="*{nom}"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="basic-icon-default-fullname"
+                                                    placeholder="PENE"
+                                                    aria-label="Pene"
+                                                    aria-describedby="basic-icon-default-fullname2"/>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fullname">Prenom</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname1" class="input-group-text"><i class="bx bx-user"></i></span>
+                                            <input
+                                                    th:field="*{prenom}"
+                                                    type="text"
+                                                    id="basic-icon-default-fullname3"
+                                                    class="form-control"
+                                                    placeholder="Ange"
+                                                    aria-label="Ange"
+                                                    aria-describedby="basic-icon-default-fullname1"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fullname">Date de naissance</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-birthday" class="input-group-text"><i class="bx bx-calendar-star"></i></span>
+                                            <input
+                                                    th:field="*{datenaissance}"
+                                                    type="text"
+                                                    id="basic-icon-default-birthday2"
+                                                    class="form-control"
+                                                    placeholder="08-09-2002"
+                                                    aria-label="08-09-2002"
+                                                    aria-describedby="basic-icon-default-bithday"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-email">Email</label>
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                            <input
+                                                    th:field="*{email}"
+                                                    type="text"
+                                                    id="basic-icon-default-email"
+                                                    class="form-control"
+                                                    placeholder="ange.pene"
+                                                    aria-label="ange.pene"
+                                                    aria-describedby="basic-icon-default-email2"
+                                            />
+                                            <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
+                                        </div>
+                                        <div class="form-text">You can use letters, numbers & periods</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-phone">Telephone</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
+                                            <input
+                                                    th:field="*{tel1}"
+                                                    type="text"
+                                                    id="basic-icon-default-phone"
+                                                    class="form-control phone-mask"
+                                                    placeholder="658 79 98 94"
+                                                    aria-label="658 79 98 94"
+                                                    aria-describedby="basic-icon-default-phone2"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-sex">Sexe</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-sex" class="input-group-text"><i class="bx bx-wink-smile"></i></span>
+                                            <input
+                                                    th:field="*{sexe}"
+                                                    id="basic-icon-default-sex1"
+                                                    class="form-control"
+                                                    placeholder="M"
+                                                    aria-label="M"
+                                                    aria-describedby="basic-icon-default-sex"/>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fonction">Fonction</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fonction" class="input-group-text"><i class="bx bx-briefcase-alt-2"></i></span>
+                                            <input
+                                                    th:field="*{fonction}"
+                                                    id="basic-icon-default-fonction1"
+                                                    class="form-control"
+                                                    placeholder="Agent d'entretien"
+                                                    aria-label="Agent d'Entretien"
+                                                    aria-describedby="basic-icon-default-fonction"/>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-user">Utilisateur</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-user" class="input-group-text"><i class="bx bx-user"></i></span>
+                                            <input
+                                                    th:field="*{user}"
+                                                    id="basic-icon-default-user1"
+                                                    class="form-control"
+                                                    placeholder="Francine"
+                                                    aria-label="Francine"
+                                                    aria-describedby="basic-icon-default-user"/>
+                                        </div>
+                                    </div>
+                                    <!--<div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-datemodif">Date de Modification</label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-datemodif" class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                            <input
+                                                    th:field="*{datemodif}"
+                                                    id="basic-icon-default-datemodif1"
+                                                    class="form-control"
+                                                    placeholder="22-05-2022"
+                                                    aria-label="22-05-2022"
+                                                    aria-describedby="basic-icon-default-datemodif"/>
+                                        </div>
+                                    </div>-->
+                                    <div class="mb-3">
+                                        <div class="col-md-6">
+                                            <a th:href="@{/listemployes}">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Retour
+                                                </button>
+                                            </a>
+
+                                        </div>
+                                        <div class="col-md-6 text-end">
+                                            <button type="submit" class="btn btn-primary">Appliquer</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- / Content -->
+
+                <th:block th:replace="fragments/_footer.html::footer"></th:block>
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+
+<th:block th:replace="fragments/_js.html::js"></th:block>
+</body>
+</html>

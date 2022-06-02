@@ -35,9 +35,10 @@ public class ClientServiceImpl implements IClient {
     }
 
     @Override
-    public void deleteByEmail(String email) throws HotelException {
+    public int deleteByEmail(String email) throws HotelException {
         Client client = searchByEmail(email);
         clientRepository.deleteById(client.getId());
+        return 1;
     }
 
     @Override

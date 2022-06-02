@@ -16,6 +16,8 @@ public interface IEmploye extends IEntity<EmployeDto>{
 
     public Employe searchByNom(String nom) throws HotelException;
 
+    List<EmployeDto> searchEmployeByKeyword(String keyword);
+
     EmployeDto updateEmployeDto(EmployeDto employeDto) throws HotelException;
 
     public int deleteByEmail(String email) throws HotelException;

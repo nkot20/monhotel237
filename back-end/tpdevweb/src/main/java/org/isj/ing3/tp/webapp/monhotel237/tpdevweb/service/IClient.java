@@ -15,7 +15,9 @@ public interface IClient extends IEntity<ClientDto>{
 
     public ClientDto searchByEmailDto(String email) throws HotelException;
 
-    public void deleteByEmail(String email) throws HotelException;
+    //public ClientDto searchByNomOrEmail(String nom, String email) throws HotelException;
+
+    public int deleteByEmail(String email) throws HotelException;
 
     List<ClientDto> listClients();
 

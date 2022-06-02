@@ -65,6 +65,15 @@ public class EmployeServiceImpl implements IEmploye {
     }
 
     @Override
+    public List<EmployeDto> searchEmployeByKeyword(String keyword) {
+        return employeRepository.findEmployeByNomOrEmail(keyword, keyword).get().stream()
+                //.map(acte -> acteMapper.toDto(acte))
+                .map(employeMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
     public EmployeDto updateEmployeDto(EmployeDto employeDto) throws HotelException {
         Employe employe  = searchByNom(employeDto.getNom());
         employeMapper.copy(employeDto, employe);

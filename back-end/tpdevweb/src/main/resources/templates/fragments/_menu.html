@@ -100,6 +100,11 @@
                                 <div data-i18n="Notifications">Liste des employés</div>
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a th:href="@{/rechercheremployeform}" class="menu-link">
+                                <div data-i18n="Notifications">Rechercher un employé</div>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
@@ -117,6 +122,25 @@
                         <li class="menu-item">
                             <a th:href="@{/liste-reservations.html}" class="menu-link">
                                 <div data-i18n="Notifications">Liste des réservations</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-body"></i>
+                        <div data-i18n="Account Settings">Clients</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a th:href="@{/saveclientform}" class="menu-link">
+                                <div data-i18n="Account">Ajouter un client</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/listclients}" class="menu-link">
+                                <div data-i18n="Notifications">Liste des clients</div>
                             </a>
                         </li>
 
