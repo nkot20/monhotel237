@@ -10,4 +10,9 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, nullValueCheckStrategy =  NullValueCheckStrategy.ALWAYS)
 public interface UtilisateurhotelgroupeMapper extends EntityMapper<UtilisateurhotelgroupeDto, Utilisateurhotelgroupe> {
+
+    /*Utilisateurhotelgroupe toEntity(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto);
+    UtilisateurhotelgroupeDto tDto(Utilisateurhotelgroupe utilisateurhotelgroupe);*/
+
+
 }
