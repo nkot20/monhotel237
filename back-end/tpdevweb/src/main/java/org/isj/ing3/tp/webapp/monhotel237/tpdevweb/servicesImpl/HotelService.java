@@ -3,7 +3,6 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
-import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.EntretienDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.HotelDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Hotel;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.HotelMapper;
@@ -14,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,9 +30,11 @@ public class HotelService implements IHotel {
 
     @Override
     public HotelDto addData(HotelDto hotelDto) throws HotelException {
-        CHeckNull.checkEmail(hotelDto.getEmail());
+       CHeckNull.checkEmail(hotelDto.getEmail());
         checkEmailIsAlreadyUsed(hotelDto.getEmail());
+        hotelDto.setUser("nkot");
         return hotelMapper.toDto(hotelRepository.save(hotelMapper.toEntity(hotelDto)));
+
     }
 
 
@@ -62,12 +65,19 @@ public class HotelService implements IHotel {
     @Override
     public List<HotelDto> getAll()  {
 
+
             return null;
 
     }
 
     private void checkEmailIsAlreadyUsed(String email) throws HotelException {
         if (hotelRepository.findHotelByEmail(email).isPresent()) throw new HotelException(ErrorInfo.REFERENCE_RESSOURCE_ALREADY_USED);
+    }
+    @Override
+    public List<HotelDto> Listhotel() {
+
+
+        return hotelRepository.findAll().stream().map(hotel -> hotelMapper.toDto(hotel)).collect(Collectors.toList());
     }
 
 

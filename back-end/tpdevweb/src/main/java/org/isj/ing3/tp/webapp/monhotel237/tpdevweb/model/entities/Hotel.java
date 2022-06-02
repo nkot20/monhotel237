@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategorieDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.VilleDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +30,7 @@ public class Hotel implements Serializable {
     @Column(name = "tel", nullable = false, length = 20, unique = true)
     private String tel;
 
-    @Column(name = "email", nullable = false, length = 20, unique = true)
+    @Column(name = "email",  length = 20, unique = true)
     private String email;
 
     @Column(name = "devise", nullable = false, length = 15)
@@ -43,10 +45,10 @@ public class Hotel implements Serializable {
     @Column(name = "langue", nullable = false, length = 50)
     private String langue;
 
-    @Column(name = "lienfacebook", length = 50)
+    @Column(name = "lienfacebook", length = 250)
     private String lienfacebook;
 
-    @Column(name = "lienwhatsapp", length = 50)
+    @Column(name = "lienwhatsapp", length = 250)
     private String lienwhatsapp;
 
     @Column(name = "logo", nullable = false)
@@ -55,23 +57,26 @@ public class Hotel implements Serializable {
     @Column(name = "nbetage", nullable = false)
     private Integer nbetage;
 
-    @Column(name = "siteweb", length = 50)
+    @Column(name = "siteweb", length = 250)
     private String siteweb;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ville", nullable = false)
-    private Ville ville;
+    private String ville;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "categorie", nullable = false)
-    private Categorie categorie;
+   // @ManyToOne(fetch = FetchType.LAZY, optional = false)
+   // @JoinColumn(name = "categorie", nullable = false)
+   // private Categorie categorie;
 
-    @Column(name = "datemadif", nullable = false)
+    @Column(name = "datemadif",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date datemadif = new Date();
 
-    @Column(name = "user", nullable = false, length = 50)
+
+    @Column(name = "user", nullable = false, length = 250)
     private String user;
 
+
+    @Column(name = "pays",  length = 250)
+    private String pays;
 
 }
