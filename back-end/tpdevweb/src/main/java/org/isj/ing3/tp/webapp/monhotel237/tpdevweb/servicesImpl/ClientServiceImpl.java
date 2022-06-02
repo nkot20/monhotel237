@@ -81,8 +81,15 @@ public class ClientServiceImpl implements IClient {
     }
 
     @Override
-    public Client searchByName(String nom) throws HotelException {
+    public ClientDto searchByNomDto(String nom) throws HotelException {
         CHeckNull.checkNomClient(nom);
-        return clientRepository.findClientByNom(nom).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
+        return clientMapper.toDto(clientRepository.findClientByNom(nom).orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
+    public Client searchByNom(String nom) throws HotelException{
+        CHeckNull.checkNomClient(nom);
+        return clientRepository.findClientByNom(nom)
+                .orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND));
     }
 }

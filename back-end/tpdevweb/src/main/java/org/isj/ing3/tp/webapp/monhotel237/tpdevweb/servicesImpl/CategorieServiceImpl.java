@@ -30,6 +30,7 @@ public class CategorieServiceImpl implements ICategorie {
     public CategorieDto addData(CategorieDto categorieDto) throws HotelException {
         CHeckNull.checkIntitule(categorieDto.getIntitule());
         checkIntituleIsAlreadyUsed(categorieDto.getIntitule());
+        System.out.println(categorieDto);
         return categorieMapper.toDto(categorieRepository.save(categorieMapper.toEntity(categorieDto)));
     }
 

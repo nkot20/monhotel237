@@ -6,6 +6,10 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IChambre;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IEmploye;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IEntretien;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -100,4 +104,6 @@ public class EntretientController {
         model.addAttribute("entretienDto", new EntretienDto());
         return "nettoyagesdeschambres";
     }
+
+
 }

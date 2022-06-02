@@ -13,7 +13,8 @@ import java.util.Date;
 public class CategoriechambreDto implements Serializable {
     private String libelle;
     private String description;
-    private Date datemodif;
+    private Date datemodif = new Date();
     private String username;
     private byte[] imge;
+    private String prix;
 }

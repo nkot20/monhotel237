@@ -34,16 +34,15 @@ public class Chambre implements Serializable {
     @Column(name = "nbplace", nullable = false)
     private Integer nbplace;
 
+    @Column(name = "statut", nullable = false)
+    private String statut;
+
     @Column(name = "datemodif", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date datemodif = new Date();
 
     @Column(name = "username", nullable = false, length = 50)
     private String username;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "hotel", nullable = false)
-    private Hotel hotel;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categorie", nullable = false)

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ChambreDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Categoriechambre;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Chambre;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.ChambreMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.ChambreRepository;
@@ -25,12 +26,17 @@ public class ChambreServiceImpl implements IChambre {
     private ChambreRepository chambreRepository;
     @Autowired
     private ChambreMapper chambreMapper;
+    @Autowired
+    private CategoriechambreServiceImpl categoriechambreService;
 
     @Override
     public ChambreDto addData(ChambreDto chambreDto) throws HotelException {
         CHeckNull.checkNumero(chambreDto.getNumero());
         checkIntituleIsAlreadyUsed(chambreDto.getNumero());
-        return chambreMapper.toDto(chambreRepository.save(chambreMapper.toEntity(chambreDto)));
+        Categoriechambre categoriechambre = categoriechambreService.searchCategoriechambreByLibelle(chambreDto.getCategoriechambre().getLibelle());
+        Chambre chambre = chambreMapper.toEntity(chambreDto);
+        chambre.setCategoriechambre(categoriechambre);
+        return chambreMapper.toDto(chambreRepository.save(chambre));
     }
 
     @Override
@@ -59,8 +65,12 @@ public class ChambreServiceImpl implements IChambre {
 
     @Override
     public ChambreDto update(ChambreDto chambreDto) throws HotelException {
+
+        /*Categoriechambre categoriechambre = categoriechambreService.searchCategoriechambreByLibelle(chambreDto.getCategoriechambre().getLibelle());*/
+
         Chambre entity = searchChambreByNumber(chambreDto.getNumero());
         chambreMapper.copy(chambreDto, entity);
+       /* entity.setCategoriechambre(categoriechambre);*/
         return chambreMapper.toDto(chambreRepository.save(entity));
     }
 

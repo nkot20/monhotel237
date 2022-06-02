@@ -46,6 +46,8 @@ public class EntretienRestController {
         iEntretien.update(entretienDto);
         return ResponseEntity.ok().build();
     }
+
+
     @GetMapping("/allentretien")
     public ResponseEntity<List<EntretienDto>> listeentretien() {
         return ResponseEntity.ok(iEntretien.listentretien());

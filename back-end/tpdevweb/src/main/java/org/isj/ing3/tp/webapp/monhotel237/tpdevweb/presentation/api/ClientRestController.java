@@ -37,7 +37,7 @@ public class ClientRestController {
 
     @GetMapping("/findcustomer/{nom}")
     public ResponseEntity<Client> findByNom(@PathVariable("nom") String nom) throws HotelException {
-        Client client = clientService.searchByName(nom);
+        Client client = clientService.searchByNom(nom);
         return ResponseEntity.ok(client);
     }
 

@@ -31,6 +31,8 @@ public class CategoriechambreServiceImpl implements ICategorieChambre {
     public CategoriechambreDto addData(CategoriechambreDto categoriechambreDto) throws HotelException {
         CHeckNull.checkLibelle(categoriechambreDto.getLibelle());
         checkLibelleIsAlreadyUsed(categoriechambreDto.getLibelle());
+        categoriechambreDto.setUsername("Pami Kelly");
+        System.out.println(categoriechambreDto);
         return categoriechambreMapper.toDto(categoriechambreRepository.save(categoriechambreMapper.toEntity(categoriechambreDto)));
     }
 
