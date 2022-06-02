@@ -36,6 +36,9 @@ public class Personne {
     @Temporal(TemporalType.TIMESTAMP)
     private Date datemodif = new Date();
 
+    @Column(name = "fonction", nullable = false)
+    private String fonction;
+
     @Column(name = "user", nullable = false, length = 50)
     private String user;
 }

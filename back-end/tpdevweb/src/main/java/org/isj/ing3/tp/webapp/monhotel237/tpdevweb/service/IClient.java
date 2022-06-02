@@ -11,11 +11,13 @@ import java.util.List;
 public interface IClient extends IEntity<ClientDto>{
     public Client searchByEmail(String email) throws HotelException;
 
+    public Client searchByNom(String nom) throws HotelException;
+
     public ClientDto searchByEmailDto(String email) throws HotelException;
 
     public void deleteByEmail(String email) throws HotelException;
 
     List<ClientDto> listClients();
 
-    public Client searchByName(String nom) throws HotelException;
+    public ClientDto searchByNomDto(String nom) throws HotelException;
 }
