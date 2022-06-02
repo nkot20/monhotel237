@@ -19,6 +19,6 @@ public class ChambreDto implements Serializable {
     private Integer nbplace;
     private Date datemodif;
     private String username;
-    private HotelDto hotel;
-    private Categoriechambre categoriechambre;
+    private String statut;
+    private CategoriechambreDto categoriechambre;
 }
