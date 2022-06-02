@@ -1,6 +1,7 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategoriechambreDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ChambreDto;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,7 @@ public class ChambreController {
 
     //Traitemement des valeurs saisies dans le formulaire
     @PostMapping("/enregistrerchambre")
-    public String enregistrerChambre(@ModelAttribute ChambreDto chambreDto, Model model) throws HotelException {
+    public String enregistrerChambre(@ModelAttribute ChambreDto chambreDto, Model model) throws HotelException, JRException, FileNotFoundException {
         chambreDto.setUsername("Pami Kelly");
         iChambre.addData(chambreDto);
 

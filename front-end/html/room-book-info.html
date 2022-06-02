@@ -261,101 +261,253 @@
             </aside>
             <!-- / Menu -->
             <div class="layout-page">
-                <div id="titre" class="bk-color titre">
-                    <h1>Ajouter une réservation</h1>
-                </div>
-                <ul class=" bk-color nav nav-pills flex-column flex-md-row mb-3 pb-3">
-                    <li class="li w-li nav-item">
-                        <a class="nav-link" href="room-book.html">Reservation de la chambre</a>
-                    </li>
-                    <li class="li w-li nav-item">
-                        <a class="nav-link active" href="#">Ajouter les informations</a>
-                    </li>
-                    <li class="li w-li nav-item">
-                        <a class="nav-link" href="#"> Confirmer</a>
-                    </li>
-                </ul>
-                <div class="row mt-4">
-                    <!-- Basic -->
-                    <div class="col-md-10 ms-5">
-                        <div class="col-xl">
-                            <div class="card mb-4 ms-5">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <!-- <h5 class="mb-0">Basic with Icons</h5> -->
-                                    <!-- <small class="text-muted float-end">Merged input group</small> -->
-                                </div>
-                                <div class="card-body">
-                                    <form>
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-fullname">Nom</label>
-                                            <div class="input-group input-group-merge">
-                                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
-                                                <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <!-- Search -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+
+                            </div>
+                        </div>
+                        <!-- /Search -->
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Place this tag where you want the button to render. -->
+                            <!-- <li class="nav-item lh-1 me-3">
+                                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                            </li> -->
+
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <!-- <img src="../assets/img/icons/brands/bell-regular-24.png" alt class="w-px-40 h-auto rounded-circle" /> -->
+                                        <i class="menu-icon tf-icons bx bxs-bell w-px-50 h-auto rounded-circle mt-3"></i>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <i class="bx bx-bed"></i>
+                                                <div>Nouvelle résevation</div>
+
                                             </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-fullname">Prénom</label>
-                                            <div class="input-group input-group-merge">
-                                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
-                                                <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <i class="bx bx-bed"></i>
+                                                <div>Nouvelle résevation</div>
+
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <i class="bx bx-bed"></i>
+                                                <div>Nouvelle résevation</div>
+
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Voir toutes les notifications</span>
+                                    </a>
+                            </li>
+                            </ul>
+                            </li>
+                            <!--/ User -->
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="../assets/img/avatars/pp1.jpg" alt class="w-px-30 mt-1 h-auto rounded-circle" />
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">Nkot-a-Nzok Honoré Etienne</span>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">Mon profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Paramètre</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="d-flex align-items-center align-middle">
+                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                          <span class="flex-grow-1 align-middle">Facturation</span>
+                                            <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <span class="align-middle">Déconnexion</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Réservation /</span> Ajouter une réservation</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="nav-align-top mb-4">
+                                    <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" aria-controls="navs-pills-justified-profile" aria-selected="false">
+                                            <i class="tf-icons bx bx-user"></i> Infos de la réservation
+                                            </button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true">
+                                                <i class="tf-icons bx bx-home"></i> Infos du client
+                                            </button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" aria-controls="navs-pills-justified-messages" aria-selected="false">
+                                            <i class="tf-icons bx bx-message-square"></i> Récapitulatifs
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active show" id="navs-pills-justified-home" role="tabpanel">
+
+                                            <div class="row mt-4">
+                                                <span class="text-black ms-5">Entrer toutes les informations necessaires</span>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-8">
+                                                    <form>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-fullname">Nom</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                                                <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-fullname">Prénom</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                                                <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-email">Email</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                                                <input type="text" id="basic-icon-default-email" class="form-control" placeholder="john.doe" aria-label="john.doe" aria-describedby="basic-icon-default-email2" />
+                                                                <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
+                                                            </div>
+                                                            <div class="form-text">You can use letters, numbers & periods</div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-phone">Numéro de téléphone</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
+                                                                <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="disp decalage">
+                                                            <div>
+                                                                <button type="submit" class="cancel btn btn-primary me-2">Retour</button>
+                                                            </div>
+                                                            <div class="sp">
+                                                                <a href="room-book-info.html"><button type="submit" class="btn btn-primary me-2">Continuer</button></a>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col-md-2"></div>
                                             </div>
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-email">Email</label>
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                                <input type="text" id="basic-icon-default-email" class="form-control" placeholder="john.doe" aria-label="john.doe" aria-describedby="basic-icon-default-email2" />
-                                                <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
-                                            </div>
-                                            <div class="form-text">You can use letters, numbers & periods</div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-phone">Phone No</label>
-                                            <div class="input-group input-group-merge">
-                                                <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
-                                                <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-message">Message</label>
-                                            <div class="input-group input-group-merge">
-                                                <span id="basic-icon-default-message2" class="input-group-text"><i class="bx bx-comment"></i></span>
-                                                <textarea id="basic-icon-default-message" class="form-control" placeholder="Hi, Do you have a moment to talk Joe?" aria-label="Hi, Do you have a moment to talk Joe?" aria-describedby="basic-icon-default-message2"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-phone">Date de début</label>
-                                            <div class="input-group input-group-merge">
-                                                <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-calendar"></i></span>
-                                                <input type="date" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="basic-icon-default-phone">Date de fin</label>
-                                            <div class="input-group input-group-merge">
-                                                <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-calendar-week"></i></span>
-                                                <input type="date" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
-                                            </div>
-                                        </div>
-                                        <div class="disp decalage">
-                                            <div>
-                                                <button type="submit" class="cancel btn btn-primary me-2">Retour</button>
-                                            </div>
-                                            <div class="sp">
-                                                <a href="room-book-info.html"><button type="submit" class="btn btn-primary me-2">Continuer</button></a>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- / Content -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script>
+                                ,Fait ❤️ par
+                                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Mon hotel 237</a>
+                            </div>
 
-                    <!-- Merged -->
-
+                        </div>
+                    </footer>
+                    <div class="content-backdrop fade"></div>
                 </div>
+                <!-- Content wrapper -->
+
 
             </div>
         </div>

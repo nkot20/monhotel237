@@ -1,5 +1,6 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.controller;
 
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.RoleDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.UtilisateurhotelgroupeDto;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Utilisateurhotelgroupecontroller {
     IRole iRole;
 
     @PostMapping("/ajouteruserform")
-    public String enregistrerutilisateur(@ModelAttribute UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException, ParseException {
+    public String enregistrerutilisateur(@ModelAttribute UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException, ParseException, JRException, FileNotFoundException {
         System.out.println(utilisateurhotelgroupeDto);
         //convertir la date
 

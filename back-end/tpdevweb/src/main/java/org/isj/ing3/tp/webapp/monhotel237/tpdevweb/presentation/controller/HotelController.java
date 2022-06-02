@@ -1,6 +1,7 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.HotelDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Hotel;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Controller
@@ -62,7 +64,7 @@ public class HotelController {
 
     @PostMapping("/savehotel")
     public String enregistreracte(@ModelAttribute HotelDto hotelDto,
-                                  Model model) throws HotelException {
+                                  Model model) throws HotelException, JRException, FileNotFoundException {
 
         //HotelController.log.info("enregistrer-hotel");
 

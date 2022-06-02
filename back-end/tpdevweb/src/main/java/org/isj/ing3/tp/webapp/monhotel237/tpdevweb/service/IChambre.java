@@ -15,5 +15,7 @@ public interface IChambre extends IEntity<ChambreDto>{
 
     public void deleteByNumber(Integer number) throws HotelException;
 
+    List<ChambreDto> listRoomNoReserve() throws HotelException;
+
     //List<ChambreDto> searchChambresByKeyword(String keyword);
 }

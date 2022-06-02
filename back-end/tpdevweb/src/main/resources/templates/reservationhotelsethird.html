@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
+    <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <th:block th:replace="fragments/_menu.html::menu"></th:block>
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                <th:block th:replace="fragments/_nav.html::nav"></th:block>
+                <!-- / Navbar -->
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Réservation /</span> Ajouter une réservation</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="nav-align-top mb-4">
+                                    <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" aria-controls="navs-pills-justified-profile" aria-selected="false">
+                                             <i class="tf-icons bx bx-home"></i> Infos de la réservation
+                                            </button>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" aria-controls="navs-pills-justified-messages" aria-selected="false">
+                                             <i class="tf-icons bx bx-user"></i> Infos du client
+                                            </button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home" aria-selected="true">
+                                                 <i class="tf-icons bx bx-message-square"></i> Récapitulatifs
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active show" id="navs-pills-justified-home" role="tabpanel">
+
+                                            <div class="row mt-4">
+                                                <span class="text-black ms-5">Récapitulatifs</span>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-8">
+                                                    <form th:method="post"
+                                                          th:action="@{/savereservation}"
+                                                          th:object = "${reservationDto}">
+                                                        <div class="mb-3 ">
+                                                            <label for="firstName" class="form-label">Date de début</label>
+                                                            <input class="form-control" type="date" id="firstName" name="datedebut"  th:field="*{id.datedebut}" autofocus required/>
+                                                        </div>
+                                                        <div class="mb-3 ">
+                                                            <label for="lastName" class="form-label">Date de fin</label>
+                                                            <input class="form-control" type="date" name="lastName" id="datefin" value="Slogan" th:field="*{datefin}" />
+                                                        </div>
+                                                        <div class="mb-3 ">
+                                                            <label class="form-label" for="adulte">Nombres d'adultes</label>
+                                                            <select id="adulte" th:field="*{nbadulte}" class="select2 form-select">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="enfant">Nombres d'enfants</label>
+                                                            <select id="enfant" th:field="*{nbenfant}" class="select2 form-select">
+                                                                <option value="0">0</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="politique">Politique de confidentialité</label>
+                                                            <select id="politique" class="select2 form-select" th:field="*{politique}">
+                                                                
+                                                            <option value="Annulation à une certaine date">Annulation à une certaine date</option>
+                                                            <option value="La pénalité d'une nuit">La pénalité d'une nuit</option>
+                                                            <option value="Réservation d'hôtel prépayée et non remboursable">Réservation d'hôtel prépayée et non remboursable</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="politique">Catégorie de chambres</label>
+                                                            <select id="categorie" class="select2 form-select" th:field="*{type}">
+                                                                
+                                                            <option value="1">VIP</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-fullname">Nom</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                                                <input type="text" th:field="${reservationDto.id.client.nom}" class="form-control" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-fullname">Prénom</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                                                                <input type="text" class="form-control" th:field="${reservationDto.id.client.prenom}" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-email">Email</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                                                                <input type="text" th:field="${reservationDto.id.client.email}" id="basic-icon-default-email" class="form-control" placeholder="john.doe" aria-label="john.doe" aria-describedby="basic-icon-default-email2" />
+                                                                <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
+                                                            </div>
+                                                            <div class="form-text">You can use letters, numbers & periods</div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="basic-icon-default-phone">Numéro de téléphone</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
+                                                                <input type="text" th:field="${reservationDto.id.client.tel1}" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <span class="text-primary mt-3">Choisir une chambre</span>
+                                                        <div class="mb-3 mt-2">
+                                                            <label class="form-label" for="enfant">Chambre</label>
+                                                            <select id="enfant" th:field="${reservationDto.id.chambre.numero}" class="select2 form-select">
+                                                                <option th:each="chambreDto : ${chambreDtos}" th:value="${chambreDto.numero}" th:text="${chambreDto.numero}">101</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="disp decalage">
+                                                            <div class="row">
+                                                                <div class="col-md-6 text-start">
+                                                                    <button type="submit" class="cancel btn btn-primary me-2">Retour</button>
+                                                                </div>
+                                                                <div class="col-md-6 text-end">
+                                                                    <a href="room-book-info.html"><button type="submit" class="btn btn-primary me-2">Continuer</button></a>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <th:block th:replace="fragments/_footer.html::footer"></th:block>
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <th:block th:replace="fragments/_js.html::js"></th:block>
+</body>
+
+</html>

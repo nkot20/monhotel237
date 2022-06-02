@@ -1,6 +1,7 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.ChambreMapper;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,7 @@ public class EntretienService implements IEntretien {
     ChambreServiceImpl chambreService;
 
     @Override
-    public EntretienDto addData(EntretienDto entretienDto) throws HotelException {
+    public EntretienDto addData(EntretienDto entretienDto) throws HotelException, JRException, FileNotFoundException {
         //CHeckNull.checkNumero(entretienDto.getNumero());
         entretienDto.setNumero(generateUniqueNumber());
         entretienDto.setUser("nkot");

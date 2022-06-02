@@ -2,6 +2,7 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.api;
 
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.UtilisateurhotelgroupeDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Utilisateurhotelgroupe;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class UtilisateurhotelgroupeRestController {
     private IUtilisateurHotelGroupe iUtilisateurHotelGroupe;
 
     @PostMapping("/adduser")
-    public ResponseEntity<Void> save(@RequestBody UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
+    public ResponseEntity<Void> save(@RequestBody UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException, JRException, FileNotFoundException {
         iUtilisateurHotelGroupe.addData(utilisateurhotelgroupeDto);
         return ResponseEntity.ok().build();
     }

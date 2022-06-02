@@ -35,7 +35,8 @@ public class Reservation implements Serializable {
     @Column(name = "quantite", nullable = false)
     private Integer quantite;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+
+    @Column(name = "politique", nullable = false)
+    private String politique;
 
 }

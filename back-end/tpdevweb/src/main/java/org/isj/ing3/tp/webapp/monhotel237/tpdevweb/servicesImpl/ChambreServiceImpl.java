@@ -64,6 +64,13 @@ public class ChambreServiceImpl implements IChambre {
     }
 
     @Override
+    public List<ChambreDto> listRoomNoReserve() throws HotelException {
+
+        return getChambreDto(chambreRepository.findChanbreNoReserve().
+                orElseThrow(() -> new HotelException(ErrorInfo.RESSOURCE_NOT_FOUND)));
+    }
+
+    @Override
     public ChambreDto update(ChambreDto chambreDto) throws HotelException {
 
         /*Categoriechambre categoriechambre = categoriechambreService.searchCategoriechambreByLibelle(chambreDto.getCategoriechambre().getLibelle());*/
@@ -89,11 +96,18 @@ public class ChambreServiceImpl implements IChambre {
                 .collect(Collectors.toList());
     }
 
+    private List<ChambreDto> getChambreDto(List<Chambre> chambres) {
+
+        return chambres.stream().map(chambreMapper::toDto).collect(Collectors.toList());
+
+    }
     /*@Override
     public List<ChambreDto> searchChambresByKeyword(Integer number) {
         return chambreRepository.findChambreByNumero(number).get().stream()
                 .map(chambreMapper::toDto)
                 .collect(Collectors.toList());
     }*/
+
+
 
 }

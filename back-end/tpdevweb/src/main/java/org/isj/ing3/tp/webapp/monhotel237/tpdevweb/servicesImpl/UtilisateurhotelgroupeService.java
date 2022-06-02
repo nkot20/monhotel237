@@ -1,6 +1,7 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.servicesImpl;
 
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.UtilisateurhotelgroupeDto;
@@ -34,7 +35,7 @@ public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
     private RoleService roleService;
 
     @Override
-    public UtilisateurhotelgroupeDto addData(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
+    public UtilisateurhotelgroupeDto addData(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException, JRException {
         utilisateurhotelgroupeDto.setUser("jsddsdksj");
         CHeckNull.checkEmail(utilisateurhotelgroupeDto.getEmail());
         checkeEmailIsAlreadyUsed(utilisateurhotelgroupeDto.getEmail());

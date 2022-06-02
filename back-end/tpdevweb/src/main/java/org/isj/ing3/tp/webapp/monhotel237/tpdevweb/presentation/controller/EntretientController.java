@@ -1,5 +1,6 @@
 package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.controller;
 
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.*;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.IChambre;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class EntretientController {
     }
 
     @PostMapping("/enregistrernettoyage")
-    public String enregistrerNettoyageChambre(@ModelAttribute EntretienDto entretienDto) throws HotelException {
+    public String enregistrerNettoyageChambre(@ModelAttribute EntretienDto entretienDto) throws HotelException, JRException, FileNotFoundException {
 
         iEntretien.addData(entretienDto);
 

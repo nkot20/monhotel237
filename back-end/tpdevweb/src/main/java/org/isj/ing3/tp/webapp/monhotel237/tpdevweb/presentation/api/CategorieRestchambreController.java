@@ -2,6 +2,7 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.api;
 
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.CategoriechambreDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.service.ICategorieChambre;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,7 @@ public class CategorieRestchambreController {
     private ICategorieChambre iCategorieChambre;
 
     @PostMapping("/savecategoryroom")
-    public ResponseEntity<Void> save(@RequestBody CategoriechambreDto categoriechambreDto) throws HotelException {
+    public ResponseEntity<Void> save(@RequestBody CategoriechambreDto categoriechambreDto) throws HotelException, JRException, FileNotFoundException {
         iCategorieChambre.addData(categoriechambreDto);
         return ResponseEntity.ok().build();
     }

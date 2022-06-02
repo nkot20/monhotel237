@@ -2,6 +2,7 @@ package org.isj.ing3.tp.webapp.monhotel237.tpdevweb.presentation.api;
 
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jasperreports.engine.JRException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ChambreDto;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.ClientDto;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +31,7 @@ public class EmployeRestController {
     private IEmploye employeService;
 
     @PostMapping(value = "/saveemploye")
-    public ResponseEntity<Void> save(@RequestBody EmployeDto employeDto) throws HotelException {
+    public ResponseEntity<Void> save(@RequestBody EmployeDto employeDto) throws HotelException, JRException, FileNotFoundException {
         employeService.addData(employeDto);
         return ResponseEntity.ok().build();
     }
