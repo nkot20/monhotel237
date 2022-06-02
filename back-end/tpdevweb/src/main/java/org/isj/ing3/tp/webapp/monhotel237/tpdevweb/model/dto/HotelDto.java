@@ -26,8 +26,9 @@ public class HotelDto implements Serializable {
     private byte[] logo;
     private Integer nbetage;
     private String siteweb;
-    private VilleDto ville;
-    private CategorieDto categorie;
+    private String ville;
+    private String pays;
+    //private CategorieDto categorie;
     private Date datemadif;
     private String user;
 }

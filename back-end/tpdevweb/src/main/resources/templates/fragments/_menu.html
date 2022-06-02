@@ -244,22 +244,43 @@
                             </a>
                         </li> -->
                         <li class="menu-item">
-                            <a th:href="@{/ajouter-user.html}" class="menu-link">
+                            <a th:href="@{/ajouter_user}" class="menu-link">
                                 <div data-i18n="Notifications">Ajouter un utilisateur</div>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a th:href="@{/liste-des-utilisateurs.html}" class="menu-link">
+                            <a th:href="@{/listeutilisateurhotelgroupe}" class="menu-link">
                                 <div data-i18n="Connections">Liste des utilisateurs</div>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a th:href="@{/hotel-settings.html}" target="_blank" class="menu-link">
+                <!--li class="menu-item">
+                    <a th:href="@{/editerform}" target="_blank" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-cog"></i>
                         <div data-i18n="Support">Paramètres</div>
                     </a>
+                </li-->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-cog"></i>
+                        <div data-i18n="Account Settings">Parametres</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a th:href="@{/enregistrerhotelform}" target="_blank" class="menu-link">
+                                <!--i class="menu-icon tf-icons bx bx-cog"></i-->
+                                <div data-i18n="Support">Enregistrer un hotel</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a th:href="@{/editerform}" target="_blank" class="menu-link">
+                                <!--i class="menu-icon tf-icons bx bx-cog"></i-->
+                                <div data-i18n="Support">Editer les parametres</div>
+                            </a>
+                        </li>
+
+                    </ul>
                 </li>
 
             </ul>

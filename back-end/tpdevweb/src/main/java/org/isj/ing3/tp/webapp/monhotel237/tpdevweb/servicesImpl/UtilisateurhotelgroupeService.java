@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.ErrorInfo;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.exception.HotelException;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.dto.UtilisateurhotelgroupeDto;
+import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Role;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.model.entities.Utilisateurhotelgroupe;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.mapper.UtilisateurhotelgroupeMapper;
 import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.repository.*;
@@ -12,8 +13,12 @@ import org.isj.ing3.tp.webapp.monhotel237.tpdevweb.utils.CHeckNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.DateFormatter;
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,12 +30,18 @@ public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
     @Autowired
     private UtilisateurhotelgroupeMapper utilisateurhotelgroupeMapper;
 
+    @Autowired
+    private RoleService roleService;
+
     @Override
     public UtilisateurhotelgroupeDto addData(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
-
+        utilisateurhotelgroupeDto.setUser("jsddsdksj");
         CHeckNull.checkEmail(utilisateurhotelgroupeDto.getEmail());
         checkeEmailIsAlreadyUsed(utilisateurhotelgroupeDto.getEmail());
-        return utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupeRepository.save(utilisateurhotelgroupeMapper.toEntity(utilisateurhotelgroupeDto)));
+        Role role = roleService.searchRoleByIntitule(utilisateurhotelgroupeDto.getRole().getIntitule());
+        Utilisateurhotelgroupe utilisateurhotelgroupe = utilisateurhotelgroupeMapper.toEntity(utilisateurhotelgroupeDto);
+        utilisateurhotelgroupe.setRole(role);
+        return utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupeRepository.save(utilisateurhotelgroupe));
     }
 
 
@@ -47,22 +58,24 @@ public class UtilisateurhotelgroupeService implements IUtilisateurHotelGroupe {
     }
 
     @Override
-    public void deleteByEmail(String email) throws HotelException {
+    public String deleteByEmail(String email) throws HotelException {
         Utilisateurhotelgroupe utilisateurhotelgroupe = searchByEmail(email);
         utilisateurhotelgroupeRepository.deleteById(utilisateurhotelgroupe.getId());
+        return null;
     }
 
     @Override
     public List<UtilisateurhotelgroupeDto> listUtilisateurhotelgroupeDto() {
-        return null;
+        List<Utilisateurhotelgroupe> utilisateurhotelgroupes= utilisateurhotelgroupeRepository.findAll();
+        return utilisateurhotelgroupes.stream().map(utilisateurhotelgroupe -> utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupe)).collect(Collectors.toList());
     }
 
 
     @Override
     public UtilisateurhotelgroupeDto update(UtilisateurhotelgroupeDto utilisateurhotelgroupeDto) throws HotelException {
-        Utilisateurhotelgroupe entity = searchByEmail(utilisateurhotelgroupeDto.getEmail());
-        utilisateurhotelgroupeMapper.copy(utilisateurhotelgroupeDto, entity);
-        return utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupeRepository.save(entity));
+        Utilisateurhotelgroupe utilisateurhotelgroupe= searchByEmail(utilisateurhotelgroupeDto.getEmail());
+        utilisateurhotelgroupeMapper.copy(utilisateurhotelgroupeDto, utilisateurhotelgroupe);
+        return utilisateurhotelgroupeMapper.toDto(utilisateurhotelgroupeRepository.save(utilisateurhotelgroupe));
     }
 
     private void checkeEmailIsAlreadyUsed(String email) throws HotelException {

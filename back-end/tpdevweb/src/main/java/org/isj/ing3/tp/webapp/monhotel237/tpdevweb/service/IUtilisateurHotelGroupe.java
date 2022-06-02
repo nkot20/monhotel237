@@ -9,7 +9,7 @@ public interface IUtilisateurHotelGroupe extends IEntity<UtilisateurhotelgroupeD
 
     public Utilisateurhotelgroupe searchByEmail(String email) throws HotelException;
 
-    public void deleteByEmail(String email) throws HotelException;
+    public String deleteByEmail(String email) throws HotelException;
     List<UtilisateurhotelgroupeDto> listUtilisateurhotelgroupeDto();
 
 }

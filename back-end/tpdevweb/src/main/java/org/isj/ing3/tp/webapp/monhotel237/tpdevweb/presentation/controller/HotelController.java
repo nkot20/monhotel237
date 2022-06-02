@@ -45,7 +45,7 @@ public class HotelController {
 
         iHotel.deleteByEmail(email);
 
-        return "redirect:/listhotel";
+        return "redirect:/accueil";
     }
 
 
@@ -54,41 +54,48 @@ public class HotelController {
     public String pageEnregistrerActeForm(Model model) {
 
         HotelDto hotelDto=new HotelDto();
+        hotelDto.setUser("esta");
         model.addAttribute("hotelDto",hotelDto);
 
-        return "enregistrer";
+        return "enregistrerhotel";
     }
 
-    @PostMapping("/enregistrerhotel")
+    @PostMapping("/savehotel")
     public String enregistreracte(@ModelAttribute HotelDto hotelDto,
                                   Model model) throws HotelException {
 
-        HotelController.log.info("enregistrer-hotel");
+        //HotelController.log.info("enregistrer-hotel");
 
          iHotel.addData(hotelDto);
-        return "redirect:/listhotel";
+        return "redirect:/accueil";
 
     }
     @GetMapping("/editerform")
-    public String pageEditerForm(@RequestParam(name = "email") String email,Model model) throws HotelException {
+    public String pageEditerForm( Model model) throws HotelException {
 
-        Hotel hotelDto = iHotel.searchByEmail(email);
+
+        List<HotelDto> hotelDtos=  iHotel.Listhotel();
+        if (hotelDtos.isEmpty()){
+            return "redirect:/accueil";
+        }
+        else{
+        HotelDto hotelDto= hotelDtos.get(0);
 
         model.addAttribute("hotelDto", hotelDto);
 
 
-        return "editer";
+        return "editerhotel";}
     }
 
 
-    @PostMapping("/editerhotel")
+    @PostMapping("/edithotel")
     public String editeracte(@ModelAttribute HotelDto hotelDto,
                              Model model) throws HotelException {
 
-        HotelController.log.info("editer-acte");
+        //HotelController.log.info("edit-hotel");
         iHotel.update(hotelDto);
 
-        return "redirect:/liste";
+        return "redirect:/accueil";
     }
 
 
